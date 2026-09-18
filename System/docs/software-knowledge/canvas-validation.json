@@ -1,0 +1,37 @@
+{
+  "generatedAt": "2026-09-18T09:31:17.463Z",
+  "reports": [
+    {
+      "canvas": "SaveMAX Workflows",
+      "nodes": 49,
+      "edges": 30,
+      "brokenEdges": 0,
+      "missingFiles": 0,
+      "overlappingCards": 0
+    },
+    {
+      "canvas": "SaveMAX Route Map",
+      "nodes": 133,
+      "edges": 88,
+      "brokenEdges": 0,
+      "missingFiles": 0,
+      "overlappingCards": 0
+    },
+    {
+      "canvas": "SaveMAX Data Model",
+      "nodes": 24,
+      "edges": 57,
+      "brokenEdges": 0,
+      "missingFiles": 0,
+      "overlappingCards": 0
+    },
+    {
+      "canvas": "SaveMAX System Overview",
+      "nodes": 19,
+      "edges": 10,
+      "brokenEdges": 0,
+      "missingFiles": 0,
+      "overlappingCards": 0
+    }
+  ]
+}

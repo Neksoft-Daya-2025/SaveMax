@@ -1,0 +1,234 @@
+{
+  "nodes": [
+    {
+      "id": "intro",
+      "type": "text",
+      "text": "## SaveMAX — What not to do\n\nProject boundaries and lessons from the current source findings. These are team guardrails, not claims of implemented protection. Read the linked guide for full details.",
+      "x": 0,
+      "y": -380,
+      "width": 940,
+      "height": 230,
+      "color": "5"
+    },
+    {
+      "id": "rule0",
+      "type": "text",
+      "text": "## Scope\n\nDo not mix System with the lead-research Brain.\n\nDo not replace standalone frontend pages with anchors.\n\nDo not turn a small edit into unrelated work or deployment.",
+      "x": 0,
+      "y": 0,
+      "width": 440,
+      "height": 300,
+      "color": "1"
+    },
+    {
+      "id": "rule1",
+      "type": "text",
+      "text": "## Access\n\nDo not equate login with authorization.\n\nDo not trust browser-supplied tenant or role IDs.\n\nDo not use truthiness for string permissions such as none.",
+      "x": 540,
+      "y": 0,
+      "width": 440,
+      "height": 300,
+      "color": "1"
+    },
+    {
+      "id": "rule2",
+      "type": "text",
+      "text": "## Privacy\n\nDo not expose full records publicly.\n\nDo not treat an email submission as verified ownership.\n\nDo not publish credentials or private customer data.",
+      "x": 1080,
+      "y": 0,
+      "width": 440,
+      "height": 300,
+      "color": "1"
+    },
+    {
+      "id": "rule3",
+      "type": "text",
+      "text": "## Data\n\nDo not reset real data for a demo.\n\nDo not assume Mongoose references enforce tenant boundaries or cascades.\n\nDo not interchange Property and Unit records.",
+      "x": 1620,
+      "y": 0,
+      "width": 440,
+      "height": 300,
+      "color": "1"
+    },
+    {
+      "id": "rule4",
+      "type": "text",
+      "text": "## Financial workflows\n\nDo not hide partial failures.\n\nDo not equate a payment record with gateway settlement.\n\nDefine recovery for contract/status and payment/commission writes.",
+      "x": 0,
+      "y": 410,
+      "width": 440,
+      "height": 300,
+      "color": "1"
+    },
+    {
+      "id": "rule5",
+      "type": "text",
+      "text": "## Evidence\n\nDo not call an inventory a full audit.\n\nDo not mark unresolved warnings as fixed.\n\nDo not assume integrations work because a page or dependency exists.",
+      "x": 540,
+      "y": 410,
+      "width": 440,
+      "height": 300,
+      "color": "1"
+    },
+    {
+      "id": "rule6",
+      "type": "text",
+      "text": "## Production\n\nDo not deploy outside the requested scope.\n\nReview setup, seed, debug, test and backup endpoint guards.\n\nDo not claim readiness while known access/privacy gaps remain open.",
+      "x": 1080,
+      "y": 410,
+      "width": 440,
+      "height": 300,
+      "color": "1"
+    },
+    {
+      "id": "rule7",
+      "type": "text",
+      "text": "## Documentation\n\nDo not overwrite manual canvas work by regenerating blindly.\n\nKeep manual additions separate or change the generator.\n\nKeep source findings distinct from runtime evidence.",
+      "x": 1620,
+      "y": 410,
+      "width": 440,
+      "height": 300,
+      "color": "1"
+    },
+    {
+      "id": "guide",
+      "type": "file",
+      "file": "Software Knowledge/WHAT-NOT-TO-DO.md",
+      "x": 0,
+      "y": 870,
+      "width": 600,
+      "height": 370
+    },
+    {
+      "id": "gaps",
+      "type": "file",
+      "file": "Software Knowledge/GAPS.md",
+      "x": 720,
+      "y": 870,
+      "width": 600,
+      "height": 370
+    },
+    {
+      "id": "step0",
+      "type": "text",
+      "text": "## Scope\n\nIdentify the requested task and mode.",
+      "x": 0,
+      "y": 1420,
+      "width": 300,
+      "height": 200,
+      "color": "4"
+    },
+    {
+      "id": "step1",
+      "type": "text",
+      "text": "## Inspect\n\nRead relevant source and known gaps.",
+      "x": 370,
+      "y": 1420,
+      "width": 300,
+      "height": 200,
+      "color": "4"
+    },
+    {
+      "id": "step2",
+      "type": "text",
+      "text": "## Change\n\nMake the smallest appropriate change.",
+      "x": 740,
+      "y": 1420,
+      "width": 300,
+      "height": 200,
+      "color": "4"
+    },
+    {
+      "id": "step3",
+      "type": "text",
+      "text": "## Verify\n\nCheck the affected behavior; record limits.",
+      "x": 1110,
+      "y": 1420,
+      "width": 300,
+      "height": 200,
+      "color": "4"
+    },
+    {
+      "id": "step4",
+      "type": "text",
+      "text": "## Document\n\nUpdate findings and workflow notes.",
+      "x": 1480,
+      "y": 1420,
+      "width": 300,
+      "height": 200,
+      "color": "4"
+    },
+    {
+      "id": "step5",
+      "type": "text",
+      "text": "## Deploy if requested\n\nOnly within explicit deployment scope.",
+      "x": 1850,
+      "y": 1420,
+      "width": 300,
+      "height": 200,
+      "color": "4"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge0",
+      "fromNode": "step0",
+      "toNode": "step1",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "then",
+      "color": "4"
+    },
+    {
+      "id": "edge1",
+      "fromNode": "step1",
+      "toNode": "step2",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "then",
+      "color": "4"
+    },
+    {
+      "id": "edge2",
+      "fromNode": "step2",
+      "toNode": "step3",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "then",
+      "color": "4"
+    },
+    {
+      "id": "edge3",
+      "fromNode": "step3",
+      "toNode": "step4",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "then",
+      "color": "4"
+    },
+    {
+      "id": "edge4",
+      "fromNode": "step4",
+      "toNode": "step5",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "then",
+      "color": "4"
+    },
+    {
+      "id": "retry",
+      "fromNode": "step3",
+      "toNode": "step2",
+      "fromSide": "bottom",
+      "toSide": "bottom",
+      "toEnd": "arrow",
+      "label": "defect found → revise",
+      "color": "1"
+    }
+  ]
+}

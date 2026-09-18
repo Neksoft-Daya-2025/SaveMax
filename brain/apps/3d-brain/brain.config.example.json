@@ -1,0 +1,57 @@
+{
+  "name": "SaveMAX Brain",
+  "port": 4640,
+  "sources": [
+    {
+      "id": "business",
+      "label": "Business context",
+      "paths": [
+        "context"
+      ],
+      "color": "#38BDF8",
+      "type": "markdown",
+      "staleDays": 90,
+      "short": "Business context",
+      "blurb": "Saved knowledge from Business context."
+    },
+    {
+      "id": "workflows",
+      "label": "Workflows",
+      "paths": [
+        "workflows"
+      ],
+      "color": "#34D399",
+      "type": "markdown",
+      "staleDays": 90,
+      "short": "Workflows",
+      "blurb": "Saved knowledge from Workflows."
+    },
+    {
+      "id": "references",
+      "label": "References",
+      "paths": [
+        "references"
+      ],
+      "color": "#A78BFA",
+      "type": "markdown",
+      "staleDays": 90,
+      "short": "References",
+      "blurb": "Saved knowledge from References."
+    },
+    {
+      "id": "decisions",
+      "label": "Decisions",
+      "paths": [
+        "decisions"
+      ],
+      "color": "#FB923C",
+      "type": "markdown",
+      "staleDays": null,
+      "short": "Decisions",
+      "blurb": "Saved knowledge from Decisions."
+    }
+  ],
+  "version": 1,
+  "root": "../..",
+  "maxNodes": 3000
+}

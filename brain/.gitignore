@@ -1,0 +1,15 @@
+.env
+.env.local
+.DS_Store
+*.log
+__pycache__/
+node_modules/
+.claude/settings.local.json
+audits/
+brainstorms/
+
+# Private lead research
+leads/
+outreach/
+
+.scratch/

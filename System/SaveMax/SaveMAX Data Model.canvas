@@ -1,0 +1,816 @@
+{
+  "nodes": [
+    {
+      "id": "legend",
+      "type": "text",
+      "text": "## Mongoose model relationships\n\nAll 23 model files and literal ref declarations. Arrows mean “references”, not a database-enforced foreign key. Tenant consistency and cascades need application checks. See INVENTORY for fields and source definitions for validation/hooks.",
+      "x": 0,
+      "y": -380,
+      "width": 800,
+      "height": 230,
+      "color": "5"
+    },
+    {
+      "id": "Amenity",
+      "type": "text",
+      "text": "## Amenity\n\nSource: `models/Amenity.ts`\n\nFields: name, icon, status, organization, createdBy\n\nReferences: Organization, User",
+      "x": 0,
+      "y": 0,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "BlogPost",
+      "type": "text",
+      "text": "## BlogPost\n\nSource: `models/BlogPost.ts`\n\nFields: title, slug, organization, content, excerpt, thumbnail, author, category, tags, status, seo, isFeatured\n\nReferences: Organization, User",
+      "x": 610,
+      "y": 0,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "Booking",
+      "type": "text",
+      "text": "## Booking\n\nSource: `models/Booking.ts`\n\nFields: organization, property, unit, customer, agent, visitDate, visitTime, status, message, adminNotes\n\nReferences: Organization, Property, Unit, User",
+      "x": 1220,
+      "y": 0,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "Commission",
+      "type": "text",
+      "text": "## Commission\n\nSource: `models/Commission.ts`\n\nFields: organization, agent, property, contract, payment, amount, rate, type, status, paidDate, notes\n\nReferences: Organization, User, Property, Contract, Payment",
+      "x": 1830,
+      "y": 0,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "Contract",
+      "type": "text",
+      "text": "## Contract\n\nSource: `models/Contract.ts`\n\nFields: property, unit, type, organization, parties, details, status, documents\n\nReferences: Property, Unit, Organization, User",
+      "x": 2440,
+      "y": 0,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "Customer",
+      "type": "text",
+      "text": "## Customer\n\nSource: `models/Customer.ts`\n\nFields: name, email, phone, address, notes, totalPurchases, organization, createdBy, status\n\nReferences: Organization, User",
+      "x": 0,
+      "y": 740,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "Deposit",
+      "type": "text",
+      "text": "## Deposit\n\nSource: `models/Deposit.ts`\n\nFields: organization, property, unit, contract, client, amount, receivedAmount, paymentMethod, status, type, transactionId, receiptNumber, refundedAmount, refundDate, processedBy, notes\n\nReferences: Organization, Property, Unit, Contract, Customer, User",
+      "x": 610,
+      "y": 740,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "Expense",
+      "type": "text",
+      "text": "## Expense\n\nSource: `models/Expense.ts`\n\nFields: title, amount, category, date, reference, notes, paymentMethod, organization, recordedBy\n\nReferences: Organization, User",
+      "x": 1220,
+      "y": 740,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "FAQ",
+      "type": "text",
+      "text": "## FAQ\n\nSource: `models/FAQ.ts`\n\nFields: question, answer, category, order, isActive\n\nReferences: none detected",
+      "x": 1830,
+      "y": 740,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "Inquiry",
+      "type": "text",
+      "text": "## Inquiry\n\nSource: `models/Inquiry.ts`\n\nFields: organization, property, unit, name, email, phone, message, status, agent, customer, notes\n\nReferences: Organization, Property, Unit, User",
+      "x": 2440,
+      "y": 740,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "Maintenance",
+      "type": "text",
+      "text": "## Maintenance\n\nSource: `models/Maintenance.ts`\n\nFields: title, description, organization, property, unit, priority, status, type, requestedBy, assignedTo, cost, images, scheduledDate, completedDate, notes\n\nReferences: Organization, Property, Unit, User",
+      "x": 0,
+      "y": 1480,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "Organization",
+      "type": "text",
+      "text": "## Organization\n\nSource: `models/Organization.ts`\n\nFields: name, slug, email, phone, address, logoUrl, website, status, subscription, adminUser, settings, stats\n\nReferences: User",
+      "x": 610,
+      "y": 1480,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "Payment",
+      "type": "text",
+      "text": "## Payment\n\nSource: `models/Payment.ts`\n\nFields: property, unit, contract, client, organization, amount, receivedAmount, totalAmount, paymentType, paymentMethod, status, transactionId, billingMonth, billingYear, invoiceNumber, processedBy, notes, depositHistory\n\nReferences: Property, Unit, Contract, User, Organization",
+      "x": 1220,
+      "y": 1480,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "Payroll",
+      "type": "text",
+      "text": "## Payroll\n\nSource: `models/Payroll.ts`\n\nFields: organization, staff, month, year, baseSalary, totalCommission, totalTips, bonuses, deductions, totalAmount, status, paidDate, paymentMethod, notes, breakdown\n\nReferences: Organization, Staff, Booking",
+      "x": 1830,
+      "y": 1480,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "Property",
+      "type": "text",
+      "text": "## Property\n\nSource: `models/Property.ts`\n\nFields: title, description, propertyType, purpose, status, price, isNegotiable, areaSize, areaUnit, bedrooms, bathrooms, parking, floor, unit, block, age, possessionDate, location, nearbyPlaces, amenities, images, videos, documents, floorPlans, virtualTourUrl, isFeatured, isHot, agent, owner, seo, organization, createdBy\n\nReferences: User, Organization",
+      "x": 2440,
+      "y": 1480,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "Review",
+      "type": "text",
+      "text": "## Review\n\nSource: `models/Review.ts`\n\nFields: author, role, company, units, content, rating, avatarUrl, order, isActive, isFeatured\n\nReferences: none detected",
+      "x": 0,
+      "y": 2220,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "Role",
+      "type": "text",
+      "text": "## Role\n\nSource: `models/Role.ts`\n\nFields: name, organization, description, isSystem, permissions\n\nReferences: Organization",
+      "x": 610,
+      "y": 2220,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "SaaSSettings",
+      "type": "text",
+      "text": "## SaaSSettings\n\nSource: `models/SaaSSettings.ts`\n\nFields: id, name, price, currency, billingInterval, description, features, badge, discountNotice, isActive, logoUrl, brandTitle, brandBadge, brandSubtitle, badgeText, heroTitle, heroSubtitle, primaryCtaText, secondaryCtaText, metrics, featuresBadge, featuresTitle, featuresSubtitle, modulesBadge, modulesTitle, modulesSubtitle, pricingBadge, pricingTitle, pricingSubtitle, registrationBadge, registrationTitle, registrationSubtitle, testimonialsBadge, testimonialsTitle, testimonialsSubtitle, faqBadge, faqTitle, faqSubtitle, ctaBannerTitle, ctaBannerSubtitle, ctaBannerButtonText, footerDescription, footerCopyright, platformName, supportEmail, phone, address, currency, timezone, trialDays, plans, landingPage\n\nReferences: none detected",
+      "x": 1220,
+      "y": 2220,
+      "width": 500,
+      "height": 450,
+      "color": "4"
+    },
+    {
+      "id": "Settings",
+      "type": "text",
+      "text": "## Settings\n\nSource: `models/Settings.ts`\n\nFields: storeName, address, phone, email, website, taxId, currency, timezone, taxRate, logoUrl, businessHours, receiptFooter, termsAndConditions, smsEnabled, twilioAccountSid, twilioAuthToken, twilioPhoneNumber, emailEnabled, smtpHost, smtpPort, smtpSecure, smtpUser, smtpPassword, smtpFrom, reminderDaysBefore, reminderMethod, aiEnabled, openaiApiKey, openaiModel, siteSeo\n\nReferences: none detected",
+      "x": 1830,
+      "y": 2220,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "Staff",
+      "type": "text",
+      "text": "## Staff\n\nSource: `models/Staff.ts`\n\nFields: organization, name, email, phone, userId, designation, skills, salary, joinDate, isActive, workingDays\n\nReferences: Organization, User",
+      "x": 2440,
+      "y": 2220,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "Supplier",
+      "type": "text",
+      "text": "## Supplier\n\nSource: `models/Supplier.ts`\n\nFields: name, organization, contactPerson, email, phone, address, createdBy, status\n\nReferences: Organization, User",
+      "x": 0,
+      "y": 2960,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "Unit",
+      "type": "text",
+      "text": "## Unit\n\nSource: `models/Unit.ts`\n\nFields: property, unitNumber, block, floor, type, price, areaSize, bedrooms, bathrooms, windows, status, features, images, isCorner, facing, owner, tenant, organization, createdBy\n\nReferences: Property, User, Organization",
+      "x": 610,
+      "y": 2960,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    },
+    {
+      "id": "User",
+      "type": "text",
+      "text": "## User\n\nSource: `models/User.ts`\n\nFields: name, email, password, phone, profileImage, role, isSuperAdmin, organization, status, emailVerified, agentDetails, ownerDetails, customerDetails\n\nReferences: Role, Organization, User",
+      "x": 1220,
+      "y": 2960,
+      "width": 500,
+      "height": 360,
+      "color": "4"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "fromNode": "Amenity",
+      "toNode": "Organization",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e1",
+      "fromNode": "Amenity",
+      "toNode": "User",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e2",
+      "fromNode": "BlogPost",
+      "toNode": "Organization",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e3",
+      "fromNode": "BlogPost",
+      "toNode": "User",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e4",
+      "fromNode": "Booking",
+      "toNode": "Organization",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e5",
+      "fromNode": "Booking",
+      "toNode": "Property",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e6",
+      "fromNode": "Booking",
+      "toNode": "Unit",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e7",
+      "fromNode": "Booking",
+      "toNode": "User",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e8",
+      "fromNode": "Commission",
+      "toNode": "Organization",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e9",
+      "fromNode": "Commission",
+      "toNode": "User",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e10",
+      "fromNode": "Commission",
+      "toNode": "Property",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e11",
+      "fromNode": "Commission",
+      "toNode": "Contract",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e12",
+      "fromNode": "Commission",
+      "toNode": "Payment",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e13",
+      "fromNode": "Contract",
+      "toNode": "Property",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e14",
+      "fromNode": "Contract",
+      "toNode": "Unit",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e15",
+      "fromNode": "Contract",
+      "toNode": "Organization",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e16",
+      "fromNode": "Contract",
+      "toNode": "User",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e17",
+      "fromNode": "Customer",
+      "toNode": "Organization",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e18",
+      "fromNode": "Customer",
+      "toNode": "User",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e19",
+      "fromNode": "Deposit",
+      "toNode": "Organization",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e20",
+      "fromNode": "Deposit",
+      "toNode": "Property",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e21",
+      "fromNode": "Deposit",
+      "toNode": "Unit",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e22",
+      "fromNode": "Deposit",
+      "toNode": "Contract",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e23",
+      "fromNode": "Deposit",
+      "toNode": "Customer",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e24",
+      "fromNode": "Deposit",
+      "toNode": "User",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e25",
+      "fromNode": "Expense",
+      "toNode": "Organization",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e26",
+      "fromNode": "Expense",
+      "toNode": "User",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e27",
+      "fromNode": "Inquiry",
+      "toNode": "Organization",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e28",
+      "fromNode": "Inquiry",
+      "toNode": "Property",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e29",
+      "fromNode": "Inquiry",
+      "toNode": "Unit",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e30",
+      "fromNode": "Inquiry",
+      "toNode": "User",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e31",
+      "fromNode": "Maintenance",
+      "toNode": "Organization",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e32",
+      "fromNode": "Maintenance",
+      "toNode": "Property",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e33",
+      "fromNode": "Maintenance",
+      "toNode": "Unit",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e34",
+      "fromNode": "Maintenance",
+      "toNode": "User",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e35",
+      "fromNode": "Organization",
+      "toNode": "User",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e36",
+      "fromNode": "Payment",
+      "toNode": "Property",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e37",
+      "fromNode": "Payment",
+      "toNode": "Unit",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e38",
+      "fromNode": "Payment",
+      "toNode": "Contract",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e39",
+      "fromNode": "Payment",
+      "toNode": "User",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e40",
+      "fromNode": "Payment",
+      "toNode": "Organization",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e41",
+      "fromNode": "Payroll",
+      "toNode": "Organization",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e42",
+      "fromNode": "Payroll",
+      "toNode": "Staff",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e43",
+      "fromNode": "Payroll",
+      "toNode": "Booking",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e44",
+      "fromNode": "Property",
+      "toNode": "User",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e45",
+      "fromNode": "Property",
+      "toNode": "Organization",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e46",
+      "fromNode": "Role",
+      "toNode": "Organization",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e47",
+      "fromNode": "Staff",
+      "toNode": "Organization",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e48",
+      "fromNode": "Staff",
+      "toNode": "User",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e49",
+      "fromNode": "Supplier",
+      "toNode": "Organization",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e50",
+      "fromNode": "Supplier",
+      "toNode": "User",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e51",
+      "fromNode": "Unit",
+      "toNode": "Property",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e52",
+      "fromNode": "Unit",
+      "toNode": "User",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e53",
+      "fromNode": "Unit",
+      "toNode": "Organization",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e54",
+      "fromNode": "User",
+      "toNode": "Role",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e55",
+      "fromNode": "User",
+      "toNode": "Organization",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    },
+    {
+      "id": "e56",
+      "fromNode": "User",
+      "toNode": "User",
+      "fromSide": "right",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "ref",
+      "color": "3"
+    }
+  ]
+}

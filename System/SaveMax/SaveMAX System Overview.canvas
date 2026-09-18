@@ -1,0 +1,35 @@
+{
+	"nodes":[
+		{"id":"start","type":"text","text":"## SaveMAX software map\n\nSource snapshot: 2026-09-18\n\n73 pages · 72 API route files · 23 models\n\nBlue: source map. Orange: caveat. Red: known gap. Arrows show relationships, not proof of successful execution.","x":0,"y":0,"width":420,"height":280,"color":"5"},
+		{"id":"workflows","type":"file","file":"SaveMAX Workflows.canvas","x":520,"y":0,"width":440,"height":320},
+		{"id":"routes","type":"file","file":"SaveMAX Route Map.canvas","x":1040,"y":0,"width":440,"height":320},
+		{"id":"data","type":"file","file":"SaveMAX Data Model.canvas","x":1560,"y":0,"width":440,"height":320},
+		{"id":"public","type":"text","text":"## Public frontend\n\nHomepage placeholder; login; organization registration; public property/unit detail. Complete public browsing frontend pending.","x":0,"y":480,"width":420,"height":260,"color":"4"},
+		{"id":"platform","type":"text","text":"## Platform administration\n\nSuperadmin: organizations, subscriptions, global users, SaaS configuration, website content and profile.","x":520,"y":480,"width":420,"height":260,"color":"4"},
+		{"id":"workspace","type":"text","text":"## Organization workspace\n\nAdmin, Agent, Customer and Owner. Saved role permissions determine access; names alone do not.","x":1040,"y":480,"width":420,"height":260,"color":"4"},
+		{"id":"auth","type":"text","text":"## Authentication and permissions\n\nNextAuth credentials + bcrypt. Session → action permission → tenant/ownership scope. auth.ts; lib/rbac.ts; lib/tenant.ts.","x":1560,"y":480,"width":420,"height":260,"color":"4"},
+		{"id":"property","type":"text","text":"## Property operations\n\nProperties, units, amenities, agents and owners. Public detail and workspace management are separate surfaces.","x":0,"y":840,"width":420,"height":260,"color":"4"},
+		{"id":"customer","type":"text","text":"## Customer operations\n\nCustomers, bookings, inquiries, contracts, maintenance and customer dashboard.","x":520,"y":840,"width":420,"height":260,"color":"4"},
+		{"id":"finance","type":"text","text":"## Financial operations\n\nPayments, invoice records, deposits, commissions, expenses, payroll, collection and reports.","x":1040,"y":840,"width":420,"height":260,"color":"4"},
+		{"id":"admin","type":"text","text":"## Administration and content\n\nUsers, roles, staff, suppliers, settings, blogs, FAQs and reviews.","x":1560,"y":840,"width":420,"height":260,"color":"4"},
+		{"id":"stack","type":"text","text":"## Application stack\n\nNext.js App Router + React + TypeScript + Tailwind. API handlers and UI live in System. MongoDB through Mongoose.","x":0,"y":1200,"width":420,"height":260,"color":"4"},
+		{"id":"integrations","type":"text","text":"## Integrations and AI\n\nSMTP/Nodemailer; Twilio; maps dependency; AI-labelled routes. Configuration and successful external behavior remain unverified.","x":520,"y":1200,"width":420,"height":260,"color":"2"},
+		{"id":"brain","type":"text","text":"## Separate SaveMAX Brain\n\nSibling lead-research project; interface established on port 4640. Not the System backend. Technical documentation stays here.","x":1040,"y":1200,"width":420,"height":260,"color":"4"},
+		{"id":"risk","type":"text","text":"## Known gaps\n\nProperty mutation scoping; contract reference validation; public document exposure; partial financial writes; session revocation and unresolved dashboard input warning.","x":1560,"y":1200,"width":420,"height":260,"color":"1"},
+		{"id":"guide","type":"file","file":"Software Knowledge/README.md","x":0,"y":1660,"width":440,"height":320},
+		{"id":"gaps","type":"file","file":"Software Knowledge/GAPS.md","x":520,"y":1660,"width":440,"height":320},
+		{"id":"inventory","type":"file","file":"Software Knowledge/INVENTORY.md","x":1040,"y":1660,"width":440,"height":320}
+	],
+	"edges":[
+		{"id":"e0","fromNode":"start","toNode":"workflows","fromSide":"right","toSide":"left","toEnd":"arrow","label":"processes","color":"4"},
+		{"id":"e1","fromNode":"workflows","toNode":"routes","fromSide":"right","toSide":"left","toEnd":"arrow","label":"entry points","color":"4"},
+		{"id":"e2","fromNode":"routes","toNode":"data","fromSide":"right","toSide":"left","toEnd":"arrow","label":"storage map","color":"4"},
+		{"id":"e3","fromNode":"public","toNode":"auth","fromSide":"right","toSide":"left","toEnd":"arrow","label":"protected actions","color":"4"},
+		{"id":"e4","fromNode":"platform","toNode":"auth","fromSide":"right","toSide":"left","toEnd":"arrow","label":"root session","color":"4"},
+		{"id":"e5","fromNode":"workspace","toNode":"auth","fromSide":"right","toSide":"left","toEnd":"arrow","label":"role + tenant","color":"4"},
+		{"id":"e6","fromNode":"property","toNode":"customer","fromSide":"right","toSide":"left","toEnd":"arrow","label":"booking / contract","color":"4"},
+		{"id":"e7","fromNode":"customer","toNode":"finance","fromSide":"right","toSide":"left","toEnd":"arrow","label":"accounting","color":"4"},
+		{"id":"e8","fromNode":"stack","toNode":"integrations","fromSide":"right","toSide":"left","toEnd":"arrow","label":"configured services","color":"4"},
+		{"id":"e9","fromNode":"risk","toNode":"gaps","fromSide":"bottom","toSide":"top","toEnd":"arrow","label":"review details","color":"1"}
+	]
+}

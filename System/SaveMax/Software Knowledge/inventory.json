@@ -1,0 +1,1801 @@
+{
+  "generatedAt": "2026-09-18T09:28:05.850Z",
+  "sourceFiles": [
+    "app/(auth)/login/page.tsx",
+    "app/(auth)/register/page.tsx",
+    "app/(auth)/setup/page.tsx",
+    "app/(landing)/create-organization/page.tsx",
+    "app/(landing)/layout.tsx",
+    "app/(landing)/page.tsx",
+    "app/(landing)/property/[id]/page.tsx",
+    "app/(landing)/unit/[id]/page.tsx",
+    "app/ClientLayout.tsx",
+    "app/agents/[id]/page.tsx",
+    "app/agents/page.tsx",
+    "app/ai-reports/page.tsx",
+    "app/amenities/page.tsx",
+    "app/api/agents/[id]/route.ts",
+    "app/api/agents/route.ts",
+    "app/api/ai-reports/route.ts",
+    "app/api/amenities/[id]/route.ts",
+    "app/api/amenities/route.ts",
+    "app/api/auth/[...nextauth]/route.ts",
+    "app/api/auth/register/route.ts",
+    "app/api/blogs/[id]/route.ts",
+    "app/api/blogs/route.ts",
+    "app/api/bookings/[id]/route.ts",
+    "app/api/bookings/route.ts",
+    "app/api/commissions/route.ts",
+    "app/api/contracts/[id]/route.ts",
+    "app/api/contracts/route.ts",
+    "app/api/customers/[id]/route.ts",
+    "app/api/customers/route.ts",
+    "app/api/debug/route.ts",
+    "app/api/deposits/[id]/route.ts",
+    "app/api/deposits/route.ts",
+    "app/api/expenses/[id]/route.ts",
+    "app/api/expenses/route.ts",
+    "app/api/inquiries/[id]/route.ts",
+    "app/api/inquiries/route.ts",
+    "app/api/maintenance/[id]/route.ts",
+    "app/api/maintenance/route.ts",
+    "app/api/owners/[id]/route.ts",
+    "app/api/owners/route.ts",
+    "app/api/payments/[id]/route.ts",
+    "app/api/payments/route.ts",
+    "app/api/payroll/[id]/route.ts",
+    "app/api/payroll/route.ts",
+    "app/api/profile/route.ts",
+    "app/api/properties/[id]/route.ts",
+    "app/api/properties/route.ts",
+    "app/api/property-assistant/route.ts",
+    "app/api/public/bookings/route.ts",
+    "app/api/public/landing/route.ts",
+    "app/api/public/organizations/route.ts",
+    "app/api/public/plans/route.ts",
+    "app/api/public/property/[id]/route.ts",
+    "app/api/public/unit/[id]/route.ts",
+    "app/api/public/website-settings/route.ts",
+    "app/api/reports/collection/route.ts",
+    "app/api/reports/financial/route.ts",
+    "app/api/reports/rental/route.ts",
+    "app/api/roles/[id]/route.ts",
+    "app/api/roles/route.ts",
+    "app/api/seed-admin/route.ts",
+    "app/api/seed-permissions/route.ts",
+    "app/api/settings/backup/route.ts",
+    "app/api/settings/route.ts",
+    "app/api/setup/route.ts",
+    "app/api/staff/[id]/route.ts",
+    "app/api/staff/route.ts",
+    "app/api/superadmin/faqs/[id]/route.ts",
+    "app/api/superadmin/faqs/route.ts",
+    "app/api/superadmin/organizations/[id]/route.ts",
+    "app/api/superadmin/organizations/route.ts",
+    "app/api/superadmin/reviews/[id]/route.ts",
+    "app/api/superadmin/reviews/route.ts",
+    "app/api/superadmin/settings/route.ts",
+    "app/api/superadmin/stats/route.ts",
+    "app/api/superadmin/users/route.ts",
+    "app/api/superadmin/website-settings/route.ts",
+    "app/api/suppliers/[id]/route.ts",
+    "app/api/suppliers/route.ts",
+    "app/api/test-db/route.ts",
+    "app/api/units/[id]/route.ts",
+    "app/api/units/route.ts",
+    "app/api/users/[id]/route.ts",
+    "app/api/users/by-role/route.ts",
+    "app/api/users/route.ts",
+    "app/blogs/edit/[id]/page.tsx",
+    "app/blogs/new/page.tsx",
+    "app/blogs/page.tsx",
+    "app/bookings/page.tsx",
+    "app/contracts/[id]/page.tsx",
+    "app/contracts/active/page.tsx",
+    "app/contracts/create/page.tsx",
+    "app/contracts/edit/[id]/page.tsx",
+    "app/contracts/expiring/page.tsx",
+    "app/contracts/page.tsx",
+    "app/customer-dashboard/page.tsx",
+    "app/customers/[id]/payments/page.tsx",
+    "app/customers/active/page.tsx",
+    "app/customers/create/page.tsx",
+    "app/customers/page.tsx",
+    "app/dashboard/page.tsx",
+    "app/deposits/page.tsx",
+    "app/deposits/record/page.tsx",
+    "app/due-collection/page.tsx",
+    "app/expenses/page.tsx",
+    "app/inquiries/page.tsx",
+    "app/layout.tsx",
+    "app/loading.tsx",
+    "app/maintenance/emergency/page.tsx",
+    "app/maintenance/in-progress/page.tsx",
+    "app/maintenance/page.tsx",
+    "app/my-contracts/page.tsx",
+    "app/owners/page.tsx",
+    "app/payments/invoice/[id]/page.tsx",
+    "app/payments/page.tsx",
+    "app/payments/record/page.tsx",
+    "app/payroll/page.tsx",
+    "app/profile/page.tsx",
+    "app/properties/[id]/page.tsx",
+    "app/properties/create/page.tsx",
+    "app/properties/edit/[id]/page.tsx",
+    "app/properties/page.tsx",
+    "app/property-assistant/page.tsx",
+    "app/reports/collection/page.tsx",
+    "app/reports/financial/page.tsx",
+    "app/reports/rental/page.tsx",
+    "app/roles/[id]/page.tsx",
+    "app/roles/new/page.tsx",
+    "app/roles/page.tsx",
+    "app/settings/page.tsx",
+    "app/staff/page.tsx",
+    "app/superadmin/layout.tsx",
+    "app/superadmin/organizations/[id]/page.tsx",
+    "app/superadmin/organizations/create/page.tsx",
+    "app/superadmin/organizations/page.tsx",
+    "app/superadmin/page.tsx",
+    "app/superadmin/profile/page.tsx",
+    "app/superadmin/settings/page.tsx",
+    "app/superadmin/subscriptions/page.tsx",
+    "app/superadmin/users/page.tsx",
+    "app/superadmin/website-settings/page.tsx",
+    "app/suppliers/page.tsx",
+    "app/test-route/page.tsx",
+    "app/units/[id]/page.tsx",
+    "app/units/create/page.tsx",
+    "app/units/edit/[id]/page.tsx",
+    "app/units/page.tsx",
+    "app/users/[id]/page.tsx",
+    "app/users/new/page.tsx",
+    "app/users/page.tsx",
+    "auth.ts",
+    "components/NavigationLoader.tsx",
+    "components/PermissionGate.tsx",
+    "components/contract/DocumentUpload.tsx",
+    "components/dashboard/DashboardCharts.tsx",
+    "components/dashboard/Footer.tsx",
+    "components/dashboard/FormButton.tsx",
+    "components/dashboard/FormInput.tsx",
+    "components/dashboard/Header.tsx",
+    "components/dashboard/Modal.tsx",
+    "components/dashboard/MultiSearchableSelect.tsx",
+    "components/dashboard/PropertyStatusChart.tsx",
+    "components/dashboard/QuickActions.tsx",
+    "components/dashboard/RecentActivity.tsx",
+    "components/dashboard/SalesChart.tsx",
+    "components/dashboard/SearchableSelect.tsx",
+    "components/dashboard/Sidebar.tsx",
+    "components/dashboard/StatCard.tsx",
+    "components/landing/BookingForm.tsx",
+    "components/landing/Footer.tsx",
+    "components/landing/Header.tsx",
+    "components/landing/OrganizationSignupModal.tsx",
+    "components/landing/OrganizationSignupSection.tsx",
+    "components/property/AddressAutocomplete.tsx",
+    "components/property/BookingModal.tsx",
+    "components/property/ContractActions.tsx",
+    "components/property/ContractControls.tsx",
+    "components/property/ContractsTable.tsx",
+    "components/property/ImageUpload.tsx",
+    "components/property/InquiryForm.tsx",
+    "components/property/MaintenanceList.tsx",
+    "components/property/MapPicker.tsx",
+    "components/property/PropertyControls.tsx",
+    "components/property/PropertyDeleteButton.tsx",
+    "components/providers/SessionProviderWrapper.tsx",
+    "components/providers/SettingsProvider.tsx",
+    "components/reports/Report.tsx",
+    "debug-models.ts",
+    "eslint.config.mjs",
+    "hooks/usePermission.ts",
+    "lib/currency.ts",
+    "lib/dateUtils.ts",
+    "lib/initModels.ts",
+    "lib/mongodb.ts",
+    "lib/notifications.ts",
+    "lib/property-access.ts",
+    "lib/rbac.ts",
+    "lib/security.ts",
+    "lib/tenant.ts",
+    "lib/timezones.ts",
+    "middleware.ts",
+    "models/Amenity.ts",
+    "models/BlogPost.ts",
+    "models/Booking.ts",
+    "models/Commission.ts",
+    "models/Contract.ts",
+    "models/Customer.ts",
+    "models/Deposit.ts",
+    "models/Expense.ts",
+    "models/FAQ.ts",
+    "models/Inquiry.ts",
+    "models/Maintenance.ts",
+    "models/Organization.ts",
+    "models/Payment.ts",
+    "models/Payroll.ts",
+    "models/Property.ts",
+    "models/Review.ts",
+    "models/Role.ts",
+    "models/SaaSSettings.ts",
+    "models/Settings.ts",
+    "models/Staff.ts",
+    "models/Supplier.ts",
+    "models/Unit.ts",
+    "models/User.ts",
+    "next-env.d.ts",
+    "next.config.ts",
+    "postcss.config.mjs",
+    "types/next-auth.d.ts",
+    "update_theme.js"
+  ],
+  "pages": [
+    {
+      "route": "/login",
+      "file": "app/(auth)/login/page.tsx"
+    },
+    {
+      "route": "/register",
+      "file": "app/(auth)/register/page.tsx"
+    },
+    {
+      "route": "/setup",
+      "file": "app/(auth)/setup/page.tsx"
+    },
+    {
+      "route": "/create-organization",
+      "file": "app/(landing)/create-organization/page.tsx"
+    },
+    {
+      "route": "/",
+      "file": "app/(landing)/page.tsx"
+    },
+    {
+      "route": "/property/[id]",
+      "file": "app/(landing)/property/[id]/page.tsx"
+    },
+    {
+      "route": "/unit/[id]",
+      "file": "app/(landing)/unit/[id]/page.tsx"
+    },
+    {
+      "route": "/agents/[id]",
+      "file": "app/agents/[id]/page.tsx"
+    },
+    {
+      "route": "/agents",
+      "file": "app/agents/page.tsx"
+    },
+    {
+      "route": "/ai-reports",
+      "file": "app/ai-reports/page.tsx"
+    },
+    {
+      "route": "/amenities",
+      "file": "app/amenities/page.tsx"
+    },
+    {
+      "route": "/blogs/edit/[id]",
+      "file": "app/blogs/edit/[id]/page.tsx"
+    },
+    {
+      "route": "/blogs/new",
+      "file": "app/blogs/new/page.tsx"
+    },
+    {
+      "route": "/blogs",
+      "file": "app/blogs/page.tsx"
+    },
+    {
+      "route": "/bookings",
+      "file": "app/bookings/page.tsx"
+    },
+    {
+      "route": "/contracts/[id]",
+      "file": "app/contracts/[id]/page.tsx"
+    },
+    {
+      "route": "/contracts/active",
+      "file": "app/contracts/active/page.tsx"
+    },
+    {
+      "route": "/contracts/create",
+      "file": "app/contracts/create/page.tsx"
+    },
+    {
+      "route": "/contracts/edit/[id]",
+      "file": "app/contracts/edit/[id]/page.tsx"
+    },
+    {
+      "route": "/contracts/expiring",
+      "file": "app/contracts/expiring/page.tsx"
+    },
+    {
+      "route": "/contracts",
+      "file": "app/contracts/page.tsx"
+    },
+    {
+      "route": "/customer-dashboard",
+      "file": "app/customer-dashboard/page.tsx"
+    },
+    {
+      "route": "/customers/[id]/payments",
+      "file": "app/customers/[id]/payments/page.tsx"
+    },
+    {
+      "route": "/customers/active",
+      "file": "app/customers/active/page.tsx"
+    },
+    {
+      "route": "/customers/create",
+      "file": "app/customers/create/page.tsx"
+    },
+    {
+      "route": "/customers",
+      "file": "app/customers/page.tsx"
+    },
+    {
+      "route": "/dashboard",
+      "file": "app/dashboard/page.tsx"
+    },
+    {
+      "route": "/deposits",
+      "file": "app/deposits/page.tsx"
+    },
+    {
+      "route": "/deposits/record",
+      "file": "app/deposits/record/page.tsx"
+    },
+    {
+      "route": "/due-collection",
+      "file": "app/due-collection/page.tsx"
+    },
+    {
+      "route": "/expenses",
+      "file": "app/expenses/page.tsx"
+    },
+    {
+      "route": "/inquiries",
+      "file": "app/inquiries/page.tsx"
+    },
+    {
+      "route": "/maintenance/emergency",
+      "file": "app/maintenance/emergency/page.tsx"
+    },
+    {
+      "route": "/maintenance/in-progress",
+      "file": "app/maintenance/in-progress/page.tsx"
+    },
+    {
+      "route": "/maintenance",
+      "file": "app/maintenance/page.tsx"
+    },
+    {
+      "route": "/my-contracts",
+      "file": "app/my-contracts/page.tsx"
+    },
+    {
+      "route": "/owners",
+      "file": "app/owners/page.tsx"
+    },
+    {
+      "route": "/payments/invoice/[id]",
+      "file": "app/payments/invoice/[id]/page.tsx"
+    },
+    {
+      "route": "/payments",
+      "file": "app/payments/page.tsx"
+    },
+    {
+      "route": "/payments/record",
+      "file": "app/payments/record/page.tsx"
+    },
+    {
+      "route": "/payroll",
+      "file": "app/payroll/page.tsx"
+    },
+    {
+      "route": "/profile",
+      "file": "app/profile/page.tsx"
+    },
+    {
+      "route": "/properties/[id]",
+      "file": "app/properties/[id]/page.tsx"
+    },
+    {
+      "route": "/properties/create",
+      "file": "app/properties/create/page.tsx"
+    },
+    {
+      "route": "/properties/edit/[id]",
+      "file": "app/properties/edit/[id]/page.tsx"
+    },
+    {
+      "route": "/properties",
+      "file": "app/properties/page.tsx"
+    },
+    {
+      "route": "/property-assistant",
+      "file": "app/property-assistant/page.tsx"
+    },
+    {
+      "route": "/reports/collection",
+      "file": "app/reports/collection/page.tsx"
+    },
+    {
+      "route": "/reports/financial",
+      "file": "app/reports/financial/page.tsx"
+    },
+    {
+      "route": "/reports/rental",
+      "file": "app/reports/rental/page.tsx"
+    },
+    {
+      "route": "/roles/[id]",
+      "file": "app/roles/[id]/page.tsx"
+    },
+    {
+      "route": "/roles/new",
+      "file": "app/roles/new/page.tsx"
+    },
+    {
+      "route": "/roles",
+      "file": "app/roles/page.tsx"
+    },
+    {
+      "route": "/settings",
+      "file": "app/settings/page.tsx"
+    },
+    {
+      "route": "/staff",
+      "file": "app/staff/page.tsx"
+    },
+    {
+      "route": "/superadmin/organizations/[id]",
+      "file": "app/superadmin/organizations/[id]/page.tsx"
+    },
+    {
+      "route": "/superadmin/organizations/create",
+      "file": "app/superadmin/organizations/create/page.tsx"
+    },
+    {
+      "route": "/superadmin/organizations",
+      "file": "app/superadmin/organizations/page.tsx"
+    },
+    {
+      "route": "/superadmin",
+      "file": "app/superadmin/page.tsx"
+    },
+    {
+      "route": "/superadmin/profile",
+      "file": "app/superadmin/profile/page.tsx"
+    },
+    {
+      "route": "/superadmin/settings",
+      "file": "app/superadmin/settings/page.tsx"
+    },
+    {
+      "route": "/superadmin/subscriptions",
+      "file": "app/superadmin/subscriptions/page.tsx"
+    },
+    {
+      "route": "/superadmin/users",
+      "file": "app/superadmin/users/page.tsx"
+    },
+    {
+      "route": "/superadmin/website-settings",
+      "file": "app/superadmin/website-settings/page.tsx"
+    },
+    {
+      "route": "/suppliers",
+      "file": "app/suppliers/page.tsx"
+    },
+    {
+      "route": "/test-route",
+      "file": "app/test-route/page.tsx"
+    },
+    {
+      "route": "/units/[id]",
+      "file": "app/units/[id]/page.tsx"
+    },
+    {
+      "route": "/units/create",
+      "file": "app/units/create/page.tsx"
+    },
+    {
+      "route": "/units/edit/[id]",
+      "file": "app/units/edit/[id]/page.tsx"
+    },
+    {
+      "route": "/units",
+      "file": "app/units/page.tsx"
+    },
+    {
+      "route": "/users/[id]",
+      "file": "app/users/[id]/page.tsx"
+    },
+    {
+      "route": "/users/new",
+      "file": "app/users/new/page.tsx"
+    },
+    {
+      "route": "/users",
+      "file": "app/users/page.tsx"
+    }
+  ],
+  "apis": [
+    {
+      "route": "/api/agents/[id]",
+      "file": "app/api/agents/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/agents",
+      "file": "app/api/agents/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/ai-reports",
+      "file": "app/api/ai-reports/route.ts",
+      "methods": [
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/amenities/[id]",
+      "file": "app/api/amenities/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/amenities",
+      "file": "app/api/amenities/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/auth/[...nextauth]",
+      "file": "app/api/auth/[...nextauth]/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/auth/register",
+      "file": "app/api/auth/register/route.ts",
+      "methods": [
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/blogs/[id]",
+      "file": "app/api/blogs/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/blogs",
+      "file": "app/api/blogs/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/bookings/[id]",
+      "file": "app/api/bookings/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/bookings",
+      "file": "app/api/bookings/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/commissions",
+      "file": "app/api/commissions/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/contracts/[id]",
+      "file": "app/api/contracts/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/contracts",
+      "file": "app/api/contracts/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/customers/[id]",
+      "file": "app/api/customers/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/customers",
+      "file": "app/api/customers/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/debug",
+      "file": "app/api/debug/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "route": "/api/deposits/[id]",
+      "file": "app/api/deposits/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/deposits",
+      "file": "app/api/deposits/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/expenses/[id]",
+      "file": "app/api/expenses/[id]/route.ts",
+      "methods": [
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/expenses",
+      "file": "app/api/expenses/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/inquiries/[id]",
+      "file": "app/api/inquiries/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/inquiries",
+      "file": "app/api/inquiries/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/maintenance/[id]",
+      "file": "app/api/maintenance/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/maintenance",
+      "file": "app/api/maintenance/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/owners/[id]",
+      "file": "app/api/owners/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/owners",
+      "file": "app/api/owners/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/payments/[id]",
+      "file": "app/api/payments/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/payments",
+      "file": "app/api/payments/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/payroll/[id]",
+      "file": "app/api/payroll/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/payroll",
+      "file": "app/api/payroll/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/profile",
+      "file": "app/api/profile/route.ts",
+      "methods": [
+        "GET",
+        "PUT"
+      ]
+    },
+    {
+      "route": "/api/properties/[id]",
+      "file": "app/api/properties/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/properties",
+      "file": "app/api/properties/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/property-assistant",
+      "file": "app/api/property-assistant/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/public/bookings",
+      "file": "app/api/public/bookings/route.ts",
+      "methods": [
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/public/landing",
+      "file": "app/api/public/landing/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "route": "/api/public/organizations",
+      "file": "app/api/public/organizations/route.ts",
+      "methods": [
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/public/plans",
+      "file": "app/api/public/plans/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "route": "/api/public/property/[id]",
+      "file": "app/api/public/property/[id]/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "route": "/api/public/unit/[id]",
+      "file": "app/api/public/unit/[id]/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "route": "/api/public/website-settings",
+      "file": "app/api/public/website-settings/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "route": "/api/reports/collection",
+      "file": "app/api/reports/collection/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "route": "/api/reports/financial",
+      "file": "app/api/reports/financial/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "route": "/api/reports/rental",
+      "file": "app/api/reports/rental/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "route": "/api/roles/[id]",
+      "file": "app/api/roles/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/roles",
+      "file": "app/api/roles/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/seed-admin",
+      "file": "app/api/seed-admin/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "route": "/api/seed-permissions",
+      "file": "app/api/seed-permissions/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "route": "/api/settings/backup",
+      "file": "app/api/settings/backup/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "route": "/api/settings",
+      "file": "app/api/settings/route.ts",
+      "methods": [
+        "GET",
+        "PUT"
+      ]
+    },
+    {
+      "route": "/api/setup",
+      "file": "app/api/setup/route.ts",
+      "methods": [
+        "POST",
+        "GET"
+      ]
+    },
+    {
+      "route": "/api/staff/[id]",
+      "file": "app/api/staff/[id]/route.ts",
+      "methods": [
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/staff",
+      "file": "app/api/staff/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/superadmin/faqs/[id]",
+      "file": "app/api/superadmin/faqs/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/superadmin/faqs",
+      "file": "app/api/superadmin/faqs/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/superadmin/organizations/[id]",
+      "file": "app/api/superadmin/organizations/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/superadmin/organizations",
+      "file": "app/api/superadmin/organizations/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/superadmin/reviews/[id]",
+      "file": "app/api/superadmin/reviews/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/superadmin/reviews",
+      "file": "app/api/superadmin/reviews/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/superadmin/settings",
+      "file": "app/api/superadmin/settings/route.ts",
+      "methods": [
+        "GET",
+        "PUT"
+      ]
+    },
+    {
+      "route": "/api/superadmin/stats",
+      "file": "app/api/superadmin/stats/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "route": "/api/superadmin/users",
+      "file": "app/api/superadmin/users/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "route": "/api/superadmin/website-settings",
+      "file": "app/api/superadmin/website-settings/route.ts",
+      "methods": [
+        "GET",
+        "PUT"
+      ]
+    },
+    {
+      "route": "/api/suppliers/[id]",
+      "file": "app/api/suppliers/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/suppliers",
+      "file": "app/api/suppliers/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/test-db",
+      "file": "app/api/test-db/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "route": "/api/units/[id]",
+      "file": "app/api/units/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/units",
+      "file": "app/api/units/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "route": "/api/users/[id]",
+      "file": "app/api/users/[id]/route.ts",
+      "methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ]
+    },
+    {
+      "route": "/api/users/by-role",
+      "file": "app/api/users/by-role/route.ts",
+      "methods": [
+        "GET"
+      ]
+    },
+    {
+      "route": "/api/users",
+      "file": "app/api/users/route.ts",
+      "methods": [
+        "GET",
+        "POST"
+      ]
+    }
+  ],
+  "models": [
+    {
+      "file": "models/Amenity.ts",
+      "schemas": [
+        {
+          "fields": [
+            "name",
+            "icon",
+            "status",
+            "organization",
+            "createdBy"
+          ],
+          "line": 16
+        }
+      ],
+      "references": [
+        "Organization",
+        "User"
+      ]
+    },
+    {
+      "file": "models/BlogPost.ts",
+      "schemas": [
+        {
+          "fields": [
+            "title",
+            "slug",
+            "organization",
+            "content",
+            "excerpt",
+            "thumbnail",
+            "author",
+            "category",
+            "tags",
+            "status",
+            "seo",
+            "isFeatured"
+          ],
+          "line": 27
+        }
+      ],
+      "references": [
+        "Organization",
+        "User"
+      ]
+    },
+    {
+      "file": "models/Booking.ts",
+      "schemas": [
+        {
+          "fields": [
+            "organization",
+            "property",
+            "unit",
+            "customer",
+            "agent",
+            "visitDate",
+            "visitTime",
+            "status",
+            "message",
+            "adminNotes"
+          ],
+          "line": 21
+        }
+      ],
+      "references": [
+        "Organization",
+        "Property",
+        "Unit",
+        "User"
+      ]
+    },
+    {
+      "file": "models/Commission.ts",
+      "schemas": [
+        {
+          "fields": [
+            "organization",
+            "agent",
+            "property",
+            "contract",
+            "payment",
+            "amount",
+            "rate",
+            "type",
+            "status",
+            "paidDate",
+            "notes"
+          ],
+          "line": 22
+        }
+      ],
+      "references": [
+        "Organization",
+        "User",
+        "Property",
+        "Contract",
+        "Payment"
+      ]
+    },
+    {
+      "file": "models/Contract.ts",
+      "schemas": [
+        {
+          "fields": [
+            "property",
+            "unit",
+            "type",
+            "organization",
+            "parties",
+            "details",
+            "status",
+            "documents"
+          ],
+          "line": 33
+        }
+      ],
+      "references": [
+        "Property",
+        "Unit",
+        "Organization",
+        "User"
+      ]
+    },
+    {
+      "file": "models/Customer.ts",
+      "schemas": [
+        {
+          "fields": [
+            "name",
+            "email",
+            "phone",
+            "address",
+            "notes",
+            "totalPurchases",
+            "organization",
+            "createdBy",
+            "status"
+          ],
+          "line": 16
+        }
+      ],
+      "references": [
+        "Organization",
+        "User"
+      ]
+    },
+    {
+      "file": "models/Deposit.ts",
+      "schemas": [
+        {
+          "fields": [
+            "organization",
+            "property",
+            "unit",
+            "contract",
+            "client",
+            "amount",
+            "receivedAmount",
+            "paymentMethod",
+            "status",
+            "type",
+            "transactionId",
+            "receiptNumber",
+            "refundedAmount",
+            "refundDate",
+            "processedBy",
+            "notes"
+          ],
+          "line": 27
+        }
+      ],
+      "references": [
+        "Organization",
+        "Property",
+        "Unit",
+        "Contract",
+        "Customer",
+        "User"
+      ]
+    },
+    {
+      "file": "models/Expense.ts",
+      "schemas": [
+        {
+          "fields": [
+            "title",
+            "amount",
+            "category",
+            "date",
+            "reference",
+            "notes",
+            "paymentMethod",
+            "organization",
+            "recordedBy"
+          ],
+          "line": 17
+        }
+      ],
+      "references": [
+        "Organization",
+        "User"
+      ]
+    },
+    {
+      "file": "models/FAQ.ts",
+      "schemas": [
+        {
+          "fields": [
+            "question",
+            "answer",
+            "category",
+            "order",
+            "isActive"
+          ],
+          "line": 14
+        }
+      ],
+      "references": []
+    },
+    {
+      "file": "models/Inquiry.ts",
+      "schemas": [
+        {
+          "fields": [
+            "organization",
+            "property",
+            "unit",
+            "name",
+            "email",
+            "phone",
+            "message",
+            "status",
+            "agent",
+            "customer",
+            "notes"
+          ],
+          "line": 26
+        }
+      ],
+      "references": [
+        "Organization",
+        "Property",
+        "Unit",
+        "User"
+      ]
+    },
+    {
+      "file": "models/Maintenance.ts",
+      "schemas": [
+        {
+          "fields": [
+            "title",
+            "description",
+            "organization",
+            "property",
+            "unit",
+            "priority",
+            "status",
+            "type",
+            "requestedBy",
+            "assignedTo",
+            "cost",
+            "images",
+            "scheduledDate",
+            "completedDate",
+            "notes"
+          ],
+          "line": 26
+        }
+      ],
+      "references": [
+        "Organization",
+        "Property",
+        "Unit",
+        "User"
+      ]
+    },
+    {
+      "file": "models/Organization.ts",
+      "schemas": [
+        {
+          "fields": [
+            "name",
+            "slug",
+            "email",
+            "phone",
+            "address",
+            "logoUrl",
+            "website",
+            "status",
+            "subscription",
+            "adminUser",
+            "settings",
+            "stats"
+          ],
+          "line": 62
+        }
+      ],
+      "references": [
+        "User"
+      ]
+    },
+    {
+      "file": "models/Payment.ts",
+      "schemas": [
+        {
+          "fields": [
+            "property",
+            "unit",
+            "contract",
+            "client",
+            "organization",
+            "amount",
+            "receivedAmount",
+            "totalAmount",
+            "paymentType",
+            "paymentMethod",
+            "status",
+            "transactionId",
+            "billingMonth",
+            "billingYear",
+            "invoiceNumber",
+            "processedBy",
+            "notes",
+            "depositHistory"
+          ],
+          "line": 35
+        }
+      ],
+      "references": [
+        "Property",
+        "Unit",
+        "Contract",
+        "User",
+        "Organization"
+      ]
+    },
+    {
+      "file": "models/Payroll.ts",
+      "schemas": [
+        {
+          "fields": [
+            "organization",
+            "staff",
+            "month",
+            "year",
+            "baseSalary",
+            "totalCommission",
+            "totalTips",
+            "bonuses",
+            "deductions",
+            "totalAmount",
+            "status",
+            "paidDate",
+            "paymentMethod",
+            "notes",
+            "breakdown"
+          ],
+          "line": 31
+        }
+      ],
+      "references": [
+        "Organization",
+        "Staff",
+        "Booking"
+      ]
+    },
+    {
+      "file": "models/Property.ts",
+      "schemas": [
+        {
+          "fields": [
+            "title",
+            "description",
+            "propertyType",
+            "purpose",
+            "status",
+            "price",
+            "isNegotiable",
+            "areaSize",
+            "areaUnit",
+            "bedrooms",
+            "bathrooms",
+            "parking",
+            "floor",
+            "unit",
+            "block",
+            "age",
+            "possessionDate",
+            "location",
+            "nearbyPlaces",
+            "amenities",
+            "images",
+            "videos",
+            "documents",
+            "floorPlans",
+            "virtualTourUrl",
+            "isFeatured",
+            "isHot",
+            "agent",
+            "owner",
+            "seo",
+            "organization",
+            "createdBy"
+          ],
+          "line": 74
+        }
+      ],
+      "references": [
+        "User",
+        "Organization"
+      ]
+    },
+    {
+      "file": "models/Review.ts",
+      "schemas": [
+        {
+          "fields": [
+            "author",
+            "role",
+            "company",
+            "units",
+            "content",
+            "rating",
+            "avatarUrl",
+            "order",
+            "isActive",
+            "isFeatured"
+          ],
+          "line": 19
+        }
+      ],
+      "references": []
+    },
+    {
+      "file": "models/Role.ts",
+      "schemas": [
+        {
+          "fields": [
+            "name",
+            "organization",
+            "description",
+            "isSystem",
+            "permissions"
+          ],
+          "line": 48
+        }
+      ],
+      "references": [
+        "Organization"
+      ]
+    },
+    {
+      "file": "models/SaaSSettings.ts",
+      "schemas": [
+        {
+          "fields": [
+            "id",
+            "name",
+            "price",
+            "currency",
+            "billingInterval",
+            "description",
+            "features",
+            "badge",
+            "discountNotice",
+            "isActive"
+          ],
+          "line": 97
+        },
+        {
+          "fields": [
+            "logoUrl",
+            "brandTitle",
+            "brandBadge",
+            "brandSubtitle",
+            "badgeText",
+            "heroTitle",
+            "heroSubtitle",
+            "primaryCtaText",
+            "secondaryCtaText",
+            "metrics",
+            "featuresBadge",
+            "featuresTitle",
+            "featuresSubtitle",
+            "modulesBadge",
+            "modulesTitle",
+            "modulesSubtitle",
+            "pricingBadge",
+            "pricingTitle",
+            "pricingSubtitle",
+            "registrationBadge",
+            "registrationTitle",
+            "registrationSubtitle",
+            "testimonialsBadge",
+            "testimonialsTitle",
+            "testimonialsSubtitle",
+            "faqBadge",
+            "faqTitle",
+            "faqSubtitle",
+            "ctaBannerTitle",
+            "ctaBannerSubtitle",
+            "ctaBannerButtonText",
+            "footerDescription",
+            "footerCopyright"
+          ],
+          "line": 113
+        },
+        {
+          "fields": [
+            "platformName",
+            "supportEmail",
+            "phone",
+            "address",
+            "currency",
+            "timezone",
+            "trialDays",
+            "plans",
+            "landingPage"
+          ],
+          "line": 282
+        }
+      ],
+      "references": []
+    },
+    {
+      "file": "models/Settings.ts",
+      "schemas": [
+        {
+          "fields": [
+            "storeName",
+            "address",
+            "phone",
+            "email",
+            "website",
+            "taxId",
+            "currency",
+            "timezone",
+            "taxRate",
+            "logoUrl",
+            "businessHours",
+            "receiptFooter",
+            "termsAndConditions",
+            "smsEnabled",
+            "twilioAccountSid",
+            "twilioAuthToken",
+            "twilioPhoneNumber",
+            "emailEnabled",
+            "smtpHost",
+            "smtpPort",
+            "smtpSecure",
+            "smtpUser",
+            "smtpPassword",
+            "smtpFrom",
+            "reminderDaysBefore",
+            "reminderMethod",
+            "aiEnabled",
+            "openaiApiKey",
+            "openaiModel",
+            "siteSeo"
+          ],
+          "line": 4
+        }
+      ],
+      "references": []
+    },
+    {
+      "file": "models/Staff.ts",
+      "schemas": [
+        {
+          "fields": [
+            "organization",
+            "name",
+            "email",
+            "phone",
+            "userId",
+            "designation",
+            "skills",
+            "salary",
+            "joinDate",
+            "isActive",
+            "workingDays"
+          ],
+          "line": 24
+        }
+      ],
+      "references": [
+        "Organization",
+        "User"
+      ]
+    },
+    {
+      "file": "models/Supplier.ts",
+      "schemas": [
+        {
+          "fields": [
+            "name",
+            "organization",
+            "contactPerson",
+            "email",
+            "phone",
+            "address",
+            "createdBy",
+            "status"
+          ],
+          "line": 18
+        }
+      ],
+      "references": [
+        "Organization",
+        "User"
+      ]
+    },
+    {
+      "file": "models/Unit.ts",
+      "schemas": [
+        {
+          "fields": [
+            "property",
+            "unitNumber",
+            "block",
+            "floor",
+            "type",
+            "price",
+            "areaSize",
+            "bedrooms",
+            "bathrooms",
+            "windows",
+            "status",
+            "features",
+            "images",
+            "isCorner",
+            "facing",
+            "owner",
+            "tenant",
+            "organization",
+            "createdBy"
+          ],
+          "line": 30
+        }
+      ],
+      "references": [
+        "Property",
+        "User",
+        "Organization"
+      ]
+    },
+    {
+      "file": "models/User.ts",
+      "schemas": [
+        {
+          "fields": [
+            "name",
+            "email",
+            "password",
+            "phone",
+            "profileImage",
+            "role",
+            "isSuperAdmin",
+            "organization",
+            "status",
+            "emailVerified",
+            "agentDetails",
+            "ownerDetails",
+            "customerDetails"
+          ],
+          "line": 51
+        }
+      ],
+      "references": [
+        "Role",
+        "Organization",
+        "User"
+      ]
+    }
+  ],
+  "environmentVariableNames": [
+    "DEMO",
+    "MONGODB_URI",
+    "NEXTAUTH_SECRET",
+    "NEXTAUTH_URL",
+    "NEXT_PUBLIC_DEMO",
+    "NEXT_PUBLIC_GOOGLE_MAPS_API_KEY",
+    "NODE_ENV",
+    "SMTP_FROM",
+    "SMTP_HOST",
+    "SMTP_PASS",
+    "SMTP_PORT",
+    "SMTP_SECURE",
+    "SMTP_USER",
+    "TWILIO_ACCOUNT_SID",
+    "TWILIO_AUTH_TOKEN",
+    "TWILIO_PHONE_NUMBER"
+  ]
+}
