@@ -1,5 +1,7 @@
 # SaveMAX
 
+**Start here: [Full setup and team instructions](System/docs/SETUP.md)**
+
 SaveMAX application, source documentation, Obsidian canvases and SaveMAX Brain.
 
 ## Contents
