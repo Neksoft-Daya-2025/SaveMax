@@ -1,5 +1,10 @@
 # Save Max website changelog
 
+## 0.1.2 — 2026-10-07
+
+- Set the public phone and address on `www.savemax.ro` to the Romania contact details.
+- Route public property phone links through the Save Max contact number on that domain.
+
 ## 0.1.1 — 2026-10-07
 
 - Changed the Save Max public contact and support email to `contact@savemax.ro`.

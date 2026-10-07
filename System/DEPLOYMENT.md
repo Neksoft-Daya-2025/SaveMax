@@ -4,6 +4,8 @@ The deployed source is in `System/`. The original live instance runs as `holirot
 
 Both instances currently use the same MongoDB and Save Max AI database, so site content and account data are shared. Each instance has its own private `.env.local`, `NEXTAUTH_URL`, and `NEXTAUTH_SECRET`. Keep these secrets, database contents, dependencies, and `.next` output out of Git.
 
+The `www.savemax.ro` instance also sets `SAVEMAX_PUBLIC_PHONE` and `SAVEMAX_PUBLIC_ADDRESS` in its private `.env.local`. These override the public Save Max contact details only for that domain; the `www.holirotis.nl` instance keeps its existing details.
+
 ## Update
 
 1. Back up the current application, private environment, and databases.

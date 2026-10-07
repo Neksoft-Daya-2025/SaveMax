@@ -17,6 +17,8 @@ export type PublicTenant = {
   id: string; slug: string; name: string; logo: string; email: string; phone: string;
   address: string; kvkNumber: string; currency: string;
 };
+const isSaveMaxDomain = (slug: string) =>
+  slug === 'save-max' && process.env.NEXTAUTH_URL?.replace(/\/$/, '') === 'https://www.savemax.ro';
 export const getPublicTenant = cache(async (slug: string): Promise<PublicTenant | null> => {
   if (!/^[a-z0-9][a-z0-9-]{0,79}$/.test(slug)) return null;
   await connectDB();
@@ -24,9 +26,11 @@ export const getPublicTenant = cache(async (slug: string): Promise<PublicTenant 
     .select('name slug email phone address logoUrl settings.storeName settings.email settings.phone settings.address settings.logoUrl settings.kvkNumber settings.currency subscription.currency').lean();
   if (!org) return null;
   const s = org.settings || {};
+  const saveMaxDomain = isSaveMaxDomain(org.slug);
   return { id: String(org._id), slug: org.slug, name: s.storeName || org.name,
     logo: s.logoUrl || org.logoUrl || '', email: s.email || org.email || '',
-    phone: s.phone || org.phone || '', address: s.address || org.address || '',
+    phone: (saveMaxDomain && process.env.SAVEMAX_PUBLIC_PHONE) || s.phone || org.phone || '',
+    address: (saveMaxDomain && process.env.SAVEMAX_PUBLIC_ADDRESS) || s.address || org.address || '',
     kvkNumber: s.kvkNumber || '', currency: s.currency || org.subscription?.currency || 'EUR' };
 });
 
@@ -50,6 +54,9 @@ export async function getPublicProperty(tenant: PublicTenant, id: string): Promi
   const publicProperty = serialise(p);
   if (tenant.slug === 'save-max' && tenant.email && publicProperty.agent) {
     publicProperty.agent.email = tenant.email;
+  }
+  if (isSaveMaxDomain(tenant.slug) && tenant.phone && publicProperty.agent) {
+    publicProperty.agent.phone = tenant.phone;
   }
   return publicProperty;
 }
