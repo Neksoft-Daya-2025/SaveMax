@@ -720,7 +720,7 @@ export default function PropertyDetailsPage() {
                             <div className="space-y-2 text-sm text-gray-800 font-semibold pt-2 border-t border-gray-100">
                                 <div className="flex items-center gap-2">
                                     <Mail className="w-4 h-4 text-gray-550 shrink-0" />
-                                    <span className="truncate">{property.agent?.email || property.owner?.email || "support@propertynext.com"}</span>
+                                    <span className="truncate">{property.agent?.email || property.owner?.email || "contact@savemax.ro"}</span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Phone className="w-4 h-4 text-gray-550 shrink-0" />

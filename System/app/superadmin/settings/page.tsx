@@ -54,7 +54,7 @@ export default function SuperAdminSettingsPage() {
 
     const [platformSettings, setPlatformSettings] = useState({
         platformName: "PropertyNext SaaS",
-        supportEmail: "support@propertynext.com",
+        supportEmail: "contact@savemax.ro",
         phone: "+1 (555) 019-2834",
         address: "100 Enterprise Blvd, Suite 500, San Francisco, CA 94107",
         currency: "USD",

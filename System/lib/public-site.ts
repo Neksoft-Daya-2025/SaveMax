@@ -46,7 +46,12 @@ export async function getPublicProperty(tenant: PublicTenant, id: string): Promi
   if (!/^[a-f\d]{24}$/i.test(id)) return null;
   const p = await Property.findOne({ _id: id, organization: tenant.id, status: 'Available' })
     .select(publicFields).populate({ path: 'agent', model: User, select: 'name phone email', match: { organization: tenant.id, status: 'Active' } }).lean();
-  return p ? serialise(p) : null;
+  if (!p) return null;
+  const publicProperty = serialise(p);
+  if (tenant.slug === 'save-max' && tenant.email && publicProperty.agent) {
+    publicProperty.agent.email = tenant.email;
+  }
+  return publicProperty;
 }
 
 export async function getPublicListings(tenant: PublicTenant, params: Record<string, string | string[] | undefined>) {

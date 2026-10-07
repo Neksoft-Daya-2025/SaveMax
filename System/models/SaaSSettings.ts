@@ -286,7 +286,7 @@ const SaaSSettingsSchema = new Schema<ISaaSSettings>(
         },
         supportEmail: {
             type: String,
-            default: 'support@propertynext.com',
+            default: 'contact@savemax.ro',
         },
         phone: {
             type: String,
