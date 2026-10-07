@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 // Comprehensive World Currencies utility
 
 export interface CurrencyInfo {

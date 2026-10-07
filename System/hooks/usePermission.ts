@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 import { useSession } from "next-auth/react";
 
 type PermissionAction = 'create' | 'edit' | 'delete' | 'view';

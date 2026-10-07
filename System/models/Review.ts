@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 import mongoose, { Schema, Document, Model, models } from 'mongoose';
 
 export interface IReview extends Document {

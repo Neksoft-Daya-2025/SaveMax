@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 import { LucideIcon } from "lucide-react";
 
 interface StatCardProps {

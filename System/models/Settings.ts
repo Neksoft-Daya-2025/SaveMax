@@ -1,11 +1,10 @@
-/* Developed by RUDRA via NEKLLM */
 import mongoose from 'mongoose';
 
 const SettingsSchema = new mongoose.Schema({
     storeName: {
         type: String,
         required: [true, 'Store name is required'],
-        default: 'SaveMAX'
+        default: 'PosNext'
     },
     address: {
         type: String,
@@ -25,6 +24,11 @@ const SettingsSchema = new mongoose.Schema({
     },
     taxId: {
         type: String,
+        default: ''
+    },
+    kvkNumber: {
+        type: String,
+        trim: true,
         default: ''
     },
     currency: {
@@ -127,7 +131,7 @@ const SettingsSchema = new mongoose.Schema({
     },
     // Site SEO Settings
     siteSeo: {
-        title: { type: String, default: 'SaveMAX - Real Estate Management' },
+        title: { type: String, default: 'Property Next - Real Estate Management' },
         description: { type: String, default: 'The next generation property management system.' },
         keywords: [{ type: String, default: ['real estate', 'property', 'management'] }]
     }

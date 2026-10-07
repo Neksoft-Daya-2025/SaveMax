@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 
 import mongoose, { Schema, Document } from 'mongoose';
 

@@ -1,0 +1,1 @@
+const sharp=require('sharp');Promise.all(['canal-sunset','living-room','dutch-cities'].map(n=>sharp('public/site-assets/'+n+'.png').webp({quality:88}).toFile('public/site-assets/'+n+'.webp'))).then(()=>console.log('Encoded website assets as WebP')).catch(e=>{console.error(e);process.exit(1)});

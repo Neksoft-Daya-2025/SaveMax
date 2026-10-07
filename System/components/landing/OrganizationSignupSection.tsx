@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -217,7 +216,7 @@ export default function OrganizationSignupSection({
                                     Everything Pre-Configured
                                 </h3>
                                 <p className="text-slate-400 text-sm mt-2 leading-relaxed">
-                                    When you create an organization, SaveMAX automatically seeds dedicated security parameters and user roles for your team.
+                                    When you create an organization, PropSaaS automatically seeds dedicated security parameters and user roles for your team.
                                 </p>
 
                                 <div className="space-y-4 mt-6">

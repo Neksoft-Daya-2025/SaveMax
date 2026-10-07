@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import StatCard from '@/components/dashboard/StatCard';

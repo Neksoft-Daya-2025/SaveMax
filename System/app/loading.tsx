@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 import React from "react";
 
 export default function Loading() {

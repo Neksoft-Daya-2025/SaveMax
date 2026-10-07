@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 import NextAuth, { DefaultSession } from "next-auth";
 
 declare module "next-auth" {

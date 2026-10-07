@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -36,7 +35,7 @@ export default function Header({ onOpenSignup }: HeaderProps) {
           const lp = data.data.landingPage || {};
           setBrandData({
             logoUrl: lp.logoUrl,
-            brandTitle: 'SaveMAX',
+            brandTitle: lp.brandTitle || data.data.platformName || 'PropSaaS',
             brandBadge: lp.brandBadge || 'Cloud',
             brandSubtitle: lp.brandSubtitle || 'All-in-One Multi-Tenant PMS',
           });
@@ -92,7 +91,7 @@ export default function Header({ onOpenSignup }: HeaderProps) {
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
               <span className="text-xl font-extrabold text-white tracking-tight">
-                {brandData.brandTitle || "SaveMAX"}
+                {brandData.brandTitle || "PropSaaS"}
               </span>
               {brandData.brandBadge && (
                 <span className="text-[10px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">

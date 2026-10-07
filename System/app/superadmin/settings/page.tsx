@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
@@ -54,7 +53,7 @@ export default function SuperAdminSettingsPage() {
     }, [timezones]);
 
     const [platformSettings, setPlatformSettings] = useState({
-        platformName: "SaveMAX",
+        platformName: "PropertyNext SaaS",
         supportEmail: "support@propertynext.com",
         phone: "+1 (555) 019-2834",
         address: "100 Enterprise Blvd, Suite 500, San Francisco, CA 94107",

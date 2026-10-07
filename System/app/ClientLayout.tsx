@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 "use client";
 
 import { useState } from "react";
@@ -8,7 +7,7 @@ import Header from "@/components/dashboard/Header";
 import Footer from "@/components/dashboard/Footer";
 import NavigationLoader from "@/components/NavigationLoader";
 
-const NON_DASHBOARD_ROUTES = ["/login", "/register", "/setup", "/property", "/unit", "/superadmin", "/create-organization"];
+const NON_DASHBOARD_ROUTES = ["/site", "/login", "/register", "/setup", "/property", "/unit", "/superadmin", "/create-organization"];
 
 function isNonDashboardRoute(pathname: string): boolean {
     if (pathname === "/") return true;

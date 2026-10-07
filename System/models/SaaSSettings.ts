@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 import mongoose, { Schema, Model, models } from 'mongoose';
 
 export interface ISubscriptionPlanConfig {
@@ -119,7 +118,7 @@ const LandingPageSchema = new Schema<ILandingPageConfig>(
         },
         brandTitle: {
             type: String,
-            default: 'SaveMAX',
+            default: 'PropSaaS',
         },
         brandBadge: {
             type: String,
@@ -235,7 +234,7 @@ const LandingPageSchema = new Schema<ILandingPageConfig>(
         },
         testimonialsSubtitle: {
             type: String,
-            default: 'See how real estate organizations streamline their daily operations with SaveMAX.',
+            default: 'See how real estate organizations streamline their daily operations with PropSaaS.',
         },
 
         // FAQ
@@ -273,7 +272,7 @@ const LandingPageSchema = new Schema<ILandingPageConfig>(
         },
         footerCopyright: {
             type: String,
-            default: 'SaveMAX Platform. All rights reserved.',
+            default: 'PropSaaS Platform. All rights reserved.',
         },
     },
     { _id: false }
@@ -283,7 +282,7 @@ const SaaSSettingsSchema = new Schema<ISaaSSettings>(
     {
         platformName: {
             type: String,
-            default: 'SaveMAX',
+            default: 'PropertyNext SaaS',
         },
         supportEmail: {
             type: String,

@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/auth';
 
@@ -39,7 +38,7 @@ export async function checkPermission(
 
     let allowed = false;
     if (action === 'view') {
-        allowed = resourcePerms.view === true || resourcePerms.view === 'all' || resourcePerms.view === 'own';
+        allowed = resourcePerms.view !== 'none';
     } else {
         allowed = !!resourcePerms[action];
     }

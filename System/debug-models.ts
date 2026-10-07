@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 
 // debug-models.ts
 try {

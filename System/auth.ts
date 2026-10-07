@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import dbConnect from "@/lib/mongodb";
@@ -15,11 +14,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             async authorize(credentials) {
                 if (!credentials?.email || !credentials?.password) {
                     throw new Error("Please provide email and password");
-                }
-                // Public demo credentials are for the local development site only.
-                if (process.env.NODE_ENV !== 'development' &&
-                    /^demo\.(superadmin|admin|customer|agent)@savemax\.example$/i.test(String(credentials.email).trim())) {
-                    return null;
                 }
 
                 try {
@@ -117,34 +111,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 }
             }
 
-            // Keep existing sessions in sync with saved profile changes, including
-            // sessions opened before the profile-refresh fix was installed.
-            if (!user && token.id) {
-                try {
-                    await dbConnect();
-                    const { User } = await import("@/lib/initModels");
-                    const currentUser = await User.findById(token.id).select('name email phone');
-                    if (currentUser) {
-                        token.name = currentUser.name;
-                        token.email = currentUser.email;
-                        token.phone = currentUser.phone;
-                    }
-                } catch (error) {
-                    console.error("Error refreshing session profile:", error);
-                }
-            }
-
-            // Refresh permissions only from the database on an explicit update.
-            if (trigger === "update" && token.id) {
+            // Refresh from DB if specifically requested via trigger
+            if (trigger === "update" && session?.permissions) {
+                token.permissions = session.permissions;
+            } else if (trigger === "update" && token.roleId) {
                 try {
                     await dbConnect();
                     const { Role, Organization } = await import("@/lib/initModels");
-                    const role = token.roleId ? await Role.findById(token.roleId) : null;
+                    const role = await Role.findById(token.roleId);
                     if (role) {
                         token.role = role.name;
                         token.permissions = role.permissions;
-                    } else {
-                        token.permissions = {};
                     }
                     if (token.organizationId) {
                         const org = await Organization.findById(token.organizationId);
@@ -160,7 +137,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                         }
                     }
                 } catch (error) {
-                    token.permissions = {};
                     console.error("Error refreshing JWT callback:", error);
                 }
             }
@@ -170,8 +146,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         async session({ session, token }: { session: any; token: any }) {
             if (session.user) {
                 session.user.id = token.id as string;
-                session.user.name = token.name;
-                session.user.email = token.email;
                 session.user.role = token.role as string;
                 session.user.permissions = token.permissions;
                 session.user.phone = token.phone as any;

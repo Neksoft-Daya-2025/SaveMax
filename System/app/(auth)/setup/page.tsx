@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -121,7 +120,7 @@ export default function SetupPage() {
                     <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold uppercase tracking-wider mb-3">
                         <Sparkles className="w-3.5 h-3.5" /> Initial Platform Setup
                     </div>
-                    <h1 className="text-3xl font-extrabold text-white mb-2 tracking-tight">SaveMAX</h1>
+                    <h1 className="text-3xl font-extrabold text-white mb-2 tracking-tight">PropertyNext SaaS</h1>
                     <p className="text-slate-400 text-sm">Create the root Super Administrator account to manage organizations and platform subscriptions.</p>
                 </div>
 

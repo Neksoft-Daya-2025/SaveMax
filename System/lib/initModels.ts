@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 
 // This file ensures all Mongoose models are imported and registered
 // Import this in API routes that use populate() to avoid MissingSchemaError

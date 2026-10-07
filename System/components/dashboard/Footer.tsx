@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -25,7 +24,6 @@ export default function Footer() {
     return (
         <footer className="py-4 px-6 bg-white border-t border-gray-200">
             <div className="flex flex-col items-center justify-center text-sm text-gray-500 space-y-1">
-                <p className="text-xs">Developed by Neksoft Global Service Pvt. Ltd.</p>
                 {settings?.receiptFooter && (
                     <p className="text-xs">
                         {settings.receiptFooter}

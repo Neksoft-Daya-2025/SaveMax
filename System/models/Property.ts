@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 
 import mongoose, { Schema, Model, models } from 'mongoose';
 
@@ -10,6 +9,9 @@ export interface IProperty {
     purpose: 'Sale' | 'Rent' | 'Lease';
     status: 'Available' | 'Sold' | 'Rented' | 'Booked' | 'Pending';
     price: number;
+    pricePeriod?: 'month' | 'year';
+    hideExactAddress?: boolean;
+    submissionSource?: 'public' | 'admin';
     isNegotiable: boolean;
     areaSize: number;
     areaUnit: 'sqft' | 'sqm';
@@ -66,6 +68,7 @@ export interface IProperty {
         keywords?: string[];
     };
     organization?: mongoose.Types.ObjectId;
+    agentImport?: { approvalId: string; candidateId: string; payloadHash: string };
     createdBy: mongoose.Types.ObjectId;
     createdAt: Date;
     updatedAt: Date;
@@ -92,6 +95,9 @@ const PropertySchema = new Schema<IProperty>(
             default: 'Available'
         },
         price: { type: Number, required: true },
+        pricePeriod: { type: String, enum: ['month', 'year'], default: 'month' },
+        hideExactAddress: { type: Boolean, default: false },
+        submissionSource: { type: String, enum: ['public', 'admin'], default: 'admin' },
         isNegotiable: { type: Boolean, default: false },
         areaSize: { type: Number, required: true },
         areaUnit: { type: String, enum: ['sqft', 'sqm'], default: 'sqft' },
@@ -152,6 +158,7 @@ const PropertySchema = new Schema<IProperty>(
             ref: 'Organization',
             index: true,
         },
+        agentImport: { approvalId: String, candidateId: String, payloadHash: String },
         createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true }
     },
     {

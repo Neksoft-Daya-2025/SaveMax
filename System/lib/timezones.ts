@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 // Comprehensive Global Timezones with GMT/UTC offsets
 
 export interface TimezoneInfo {
@@ -100,21 +99,11 @@ export function getAllTimezones(): TimezoneInfo[] {
     return TIMEZONES;
 }
 
-export function getTimezoneInfo(value: string, date: Date = new Date()): TimezoneInfo {
-    const info = TIMEZONES.find((t) => t.value === value) || {
+export function getTimezoneInfo(value: string): TimezoneInfo {
+    return TIMEZONES.find((t) => t.value === value) || {
         value,
         label: `(GMT+00:00) ${value}`,
         offset: '+00:00',
         region: 'Global',
     };
-    try {
-        const zone = new Intl.DateTimeFormat('en', {
-            timeZone: value, timeZoneName: 'longOffset',
-        }).formatToParts(date).find(part => part.type === 'timeZoneName')?.value;
-        const offset = zone === 'GMT' ? '+00:00' : zone?.replace('GMT', '');
-        if (offset) return { ...info, offset, label: info.label.replace(/\(GMT[^)]*\)/, `(GMT${offset})`) };
-    } catch {
-        // Preserve the existing fallback for unknown timezone identifiers.
-    }
-    return info;
 }

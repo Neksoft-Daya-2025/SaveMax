@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 "use client";
 
 import { useSettings } from "@/components/providers/SettingsProvider";

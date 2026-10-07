@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 const fs = require('fs');
 
 let content = fs.readFileSync('app/(landing)/page.tsx', 'utf8');

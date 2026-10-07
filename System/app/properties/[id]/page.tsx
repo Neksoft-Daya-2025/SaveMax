@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -304,10 +303,11 @@ export default function PropertyDetailsPage() {
 
                 <div className="flex items-center gap-4 w-full md:w-auto shrink-0 md:justify-end border-t md:border-t-0 pt-4 md:pt-0 border-gray-100">
                     <div className="text-left md:text-right mr-auto md:mr-0">
+                        {property.submissionSource === 'public' && <p className="text-sm text-gray-700 mb-2">Submitted by {property.createdBy?.name || 'Customer'} · {property.createdBy?.email} {property.createdBy?.phone}</p>}
                         <p className="text-gray-600 text-xs font-bold uppercase tracking-widest mb-1">Asset Price</p>
                         <h2 className="text-3xl font-black text-blue-800">
                             {formatCurrency(property.price)}
-                            {property.purpose === 'Rent' && <span className="text-base font-semibold text-gray-500">/mo</span>}
+                            {['Rent', 'Lease'].includes(property.purpose) && <span className="text-base font-semibold text-gray-500"> /{property.pricePeriod === 'year' ? 'year' : 'month'}</span>}
                         </h2>
                     </div>
                     <div className="flex gap-2">

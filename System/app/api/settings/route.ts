@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Settings from '@/models/Settings';
@@ -19,7 +18,7 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({
                 success: true,
                 data: {
-                    storeName: settings?.storeName || 'SaveMAX',
+                    storeName: settings?.storeName || 'PropertyNext',
                     logoUrl: settings?.logoUrl || '',
                     address: settings?.address || '',
                     phone: settings?.phone || '',
@@ -59,7 +58,7 @@ export async function GET(request: NextRequest) {
         let settings = await Settings.findOne();
         if (!settings) {
             settings = await Settings.create({
-                storeName: 'SaveMAX',
+                storeName: 'PropertyNext',
                 currency: 'USD',
                 timezone: 'UTC',
                 taxRate: 0

@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 import Link from 'next/link';
 import { MapPin, BedDouble, Bath, Square, Building2, CheckCircle2, ChevronLeft, Phone, Mail, Layers, DoorOpen, Compass, Wind } from 'lucide-react';
 import { connectToDB } from "@/lib/mongodb";

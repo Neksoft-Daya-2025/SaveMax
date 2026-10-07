@@ -1,8 +1,8 @@
-/* Developed by RUDRA via NEKLLM */
 
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import {
     Users, Search, Filter, Home, DollarSign, TrendingUp,
     MoreVertical, Mail, Phone, Plus, UserCircle,
@@ -33,6 +33,16 @@ interface Agent {
     createdAt: string;
 }
 
+interface AgentListing {
+    _id: string;
+    title: string;
+    propertyType: string;
+    purpose: string;
+    status: string;
+    price: number;
+    location?: { city?: string; address?: string };
+}
+
 export default function AgentsPage() {
     const [agents, setAgents] = useState<Agent[]>([]);
     const [loading, setLoading] = useState(true);
@@ -46,6 +56,48 @@ export default function AgentsPage() {
     const [roles, setRoles] = useState<{ value: string, label: string }[]>([]);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
     const { formatCurrency } = useSettings();
+    const [listingsAgent, setListingsAgent] = useState<Agent | null>(null);
+    const [agentListings, setAgentListings] = useState<AgentListing[]>([]);
+    const [listingsLoading, setListingsLoading] = useState(false);
+    const [listingsError, setListingsError] = useState("");
+    const [listingsPage, setListingsPage] = useState(1);
+    const [listingsPages, setListingsPages] = useState(1);
+
+    useEffect(() => {
+        if (!listingsAgent) return;
+        const controller = new AbortController();
+        const loadListings = async () => {
+            setListingsLoading(true);
+            setListingsError("");
+            setAgentListings([]);
+            try {
+                const query = new URLSearchParams({ agent: listingsAgent._id, page: String(listingsPage), limit: "10" });
+                const res = await fetch(`/api/properties?${query}`, { signal: controller.signal });
+                const data = await res.json();
+                if (!res.ok || !data.success) throw new Error(data.error || "Could not load listings.");
+                if (controller.signal.aborted) return;
+                setAgentListings(data.data);
+                setListingsPages(Math.max(1, data.pagination?.pages || 1));
+            } catch (error) {
+                if (!controller.signal.aborted) {
+                    setListingsError(error instanceof Error ? error.message : "Could not load listings.");
+                }
+            } finally {
+                if (!controller.signal.aborted) setListingsLoading(false);
+            }
+        };
+        loadListings();
+        return () => controller.abort();
+    }, [listingsAgent, listingsPage]);
+
+    const openListings = (agent: Agent) => {
+        setAgentListings([]);
+        setListingsError("");
+        setListingsLoading(true);
+        setListingsPage(1);
+        setListingsPages(1);
+        setListingsAgent(agent);
+    };
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -337,10 +389,17 @@ export default function AgentsPage() {
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="flex items-center gap-2 text-sm font-bold text-gray-900">
-                                                    <Home className="w-4 h-4 text-gray-400" />
-                                                    {agent.listingsCount} Listings
-                                                </div>
+                                                <PermissionGate resource="properties" action="view" fallback={<span className="text-sm font-bold text-gray-900">{agent.listingsCount} Listings</span>}>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => openListings(agent)}
+                                                        aria-label={`View listings for ${agent.name}`}
+                                                        className="flex items-center gap-2 rounded text-sm font-bold text-blue-900 hover:underline focus-visible:outline-2 focus-visible:outline-blue-900"
+                                                    >
+                                                        <Home className="w-4 h-4" />
+                                                        {agent.listingsCount} {agent.listingsCount === 1 ? "Listing" : "Listings"}
+                                                    </button>
+                                                </PermissionGate>
                                                 <p className="text-[10px] text-gray-400 font-medium uppercase mt-0.5">{agent.agentDetails?.experience || 0} Years Experience</p>
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
@@ -453,6 +512,39 @@ export default function AgentsPage() {
             </div>
 
             {/* Agent Modal */}
+            <Modal isOpen={!!listingsAgent} onClose={() => setListingsAgent(null)} title={`${listingsAgent?.name || "Agent"} — Listings`} size="lg">
+                {listingsLoading ? (
+                    <p role="status" className="py-8 text-center text-gray-600">Loading listings...</p>
+                ) : listingsError ? (
+                    <div role="alert" className="space-y-3 py-4">
+                        <p className="text-red-600">{listingsError}</p>
+                        <button type="button" onClick={() => listingsAgent && openListings({ ...listingsAgent })} className="font-semibold text-blue-900 hover:underline">Try again</button>
+                    </div>
+                ) : agentListings.length === 0 ? (
+                    <p className="py-8 text-center text-gray-600">No properties assigned to this agent.</p>
+                ) : (
+                    <div className="space-y-4">
+                        {agentListings.map(property => (
+                            <div key={property._id} className="rounded-lg border border-gray-200 p-4">
+                                <Link href={`/properties/${property._id}`} className="font-semibold text-blue-900 hover:underline">{property.title}</Link>
+                                <p className="mt-1 text-sm text-gray-600">{[property.location?.address, property.location?.city].filter(Boolean).join(", ")}</p>
+                                <div className="mt-2 flex flex-wrap items-center gap-3 text-sm">
+                                    <span>{property.propertyType} · {property.purpose}</span>
+                                    <span className="font-semibold">{formatCurrency(property.price)}</span>
+                                    <span className="rounded bg-gray-100 px-2 py-1 text-gray-700">{property.status}</span>
+                                </div>
+                            </div>
+                        ))}
+                        {listingsPages > 1 && (
+                            <div className="flex items-center justify-between gap-3">
+                                <button type="button" disabled={listingsPage === 1} onClick={() => setListingsPage(p => p - 1)} className="text-blue-900 disabled:opacity-40">Previous</button>
+                                <span className="text-sm text-gray-600">Page {listingsPage} of {listingsPages}</span>
+                                <button type="button" disabled={listingsPage >= listingsPages} onClick={() => setListingsPage(p => p + 1)} className="text-blue-900 disabled:opacity-40">Next</button>
+                            </div>
+                        )}
+                    </div>
+                )}
+            </Modal>
             <Modal isOpen={isModalOpen} onClose={closeModal} title={editingAgent ? "Edit Agent Profile" : "Register New Agent"}>
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="bg-gray-50 p-6 rounded-xl space-y-4">

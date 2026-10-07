@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 
 "use client";
 
@@ -52,6 +51,7 @@ export default function EditPropertyPage() {
         purpose: "Sale",
         status: "Available",
         price: "",
+        pricePeriod: "month",
         isNegotiable: false,
         areaSize: "",
         areaUnit: "sqft",
@@ -102,6 +102,7 @@ export default function EditPropertyPage() {
                     purpose: p.purpose || "Sale",
                     status: p.status || "Available",
                     price: p.price?.toString() || "",
+                    pricePeriod: p.pricePeriod || "month",
                     isNegotiable: !!p.isNegotiable,
                     areaSize: p.areaSize?.toString() || "",
                     areaUnit: p.areaUnit || "sqft",
@@ -299,6 +300,7 @@ export default function EditPropertyPage() {
                                     onChange={(e: any) => setFormData({ ...formData, price: e.target.value })}
                                     required
                                 />
+                                {formData.purpose !== 'Sale' && <FormSelect label="Billing period" value={formData.pricePeriod} onChange={(e: any) => setFormData({ ...formData, pricePeriod: e.target.value })} options={[{ value: 'month', label: 'Per month' }, { value: 'year', label: 'Per year' }]} />}
                                 <FormSelect
                                     label="Status"
                                     value={formData.status}

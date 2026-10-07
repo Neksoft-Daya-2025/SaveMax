@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -19,7 +18,7 @@ interface UnitCounts { total: number; available: number; occupied: number; maint
 interface Property {
     _id: string; title: string; description: string;
     propertyType: string; status: string; purpose: string;
-    price: number; location: { address: string; city: string; state?: string; country: string; };
+    price: number; pricePeriod?: 'month' | 'year'; location: { address: string; city: string; state?: string; country: string; };
     images?: { url: string; isFeatured: boolean }[];
     isFeatured: boolean; unitCounts: UnitCounts;
 }
@@ -98,6 +97,19 @@ function statusBadge(status: string) {
     }
 }
 
+function PurposeBadge({ purpose }: { purpose: string }) {
+    const labels: Record<string, string> = { Sale: 'For sale', Rent: 'For rent', Lease: 'For lease' };
+    const label = labels[purpose];
+    if (!label) return null;
+    return <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-white text-gray-900 shadow-sm whitespace-nowrap">{label}</span>;
+}
+
+function PriceSuffix({ purpose, period }: { purpose: string; period?: 'month' | 'year' }) {
+    return purpose === 'Rent' || purpose === 'Lease'
+        ? <span className="text-xs font-normal text-gray-500"> /{period === 'year' ? 'year' : 'month'}</span>
+        : null;
+}
+
 // ─── Property Card (Grid) ──────────────────────────────────────────────────────
 function PropertyCard({ property, formatCurrency }: { property: Property; formatCurrency: (v: number) => string }) {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -123,6 +135,7 @@ function PropertyCard({ property, formatCurrency }: { property: Property; format
                 <span className={`absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold ${statusBadge(property.status)}`}>
                     {property.status}
                 </span>
+                <div className="absolute bottom-3 left-3"><PurposeBadge purpose={property.purpose} /></div>
                 {/* Type badge */}
                 <span className="absolute top-3 right-3 flex items-center gap-1 px-2.5 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-medium text-gray-700 border border-white/50 shadow-sm">
                     <Building2 className="w-3 h-3 text-gray-500" />
@@ -173,7 +186,7 @@ function PropertyCard({ property, formatCurrency }: { property: Property; format
                 <div className="flex items-center justify-between mt-auto pt-2 border-t border-gray-100">
                     <span className="text-sm font-bold text-gray-900">
                         {formatCurrency(property.price)}
-                        <span className="text-xs font-normal text-gray-400"> /month</span>
+                        <PriceSuffix purpose={property.purpose} period={property.pricePeriod} />
                     </span>
                     <div ref={menuRef} className="relative">
                         <button
@@ -218,6 +231,7 @@ function PropertyRow({ property, formatCurrency }: { property: Property; formatC
                 <div className="flex items-center gap-2 mb-0.5">
                     <h3 className="font-semibold text-gray-900 text-sm truncate">{property.title}</h3>
                     <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${statusBadge(property.status)}`}>{property.status}</span>
+                    <PurposeBadge purpose={property.purpose} />
                 </div>
                 <p className="text-xs text-gray-500 flex items-center gap-1">
                     <MapPin className="w-3 h-3" />{property.location.address}, {property.location.city}
@@ -231,7 +245,7 @@ function PropertyRow({ property, formatCurrency }: { property: Property; formatC
                 )}
             </div>
             <div className="shrink-0 text-right">
-                <p className="font-bold text-sm text-gray-900">{formatCurrency(property.price)}<span className="text-xs text-gray-400 font-normal">/mo</span></p>
+                <p className="font-bold text-sm text-gray-900">{formatCurrency(property.price)}<PriceSuffix purpose={property.purpose} period={property.pricePeriod} /></p>
                 <span className="text-xs text-gray-400">{property.propertyType}</span>
             </div>
             <div className="flex items-center gap-1 shrink-0">
@@ -250,8 +264,9 @@ function PropertyCompact({ property, formatCurrency }: { property: Property; for
         <div className="bg-white border border-gray-100 rounded-lg px-4 py-3 flex items-center gap-3 hover:shadow-sm transition-all">
             <span className={`w-2 h-2 rounded-full shrink-0 ${property.status === 'Available' ? 'bg-emerald-500' : property.status === 'Rented' || property.status === 'Booked' ? 'bg-orange-500' : 'bg-gray-400'}`} />
             <span className="font-medium text-sm text-gray-900 flex-1 truncate">{property.title}</span>
+            <PurposeBadge purpose={property.purpose} />
             <span className="text-xs text-gray-400 shrink-0">{property.propertyType}</span>
-            <span className="font-semibold text-sm text-gray-900 shrink-0">{formatCurrency(property.price)}</span>
+            <span className="font-semibold text-sm text-gray-900 shrink-0">{formatCurrency(property.price)}<PriceSuffix purpose={property.purpose} period={property.pricePeriod} /></span>
             <Link href={`/properties/${property._id}`} className="p-1.5 rounded hover:bg-gray-100 text-gray-400 hover:text-gray-700 shrink-0 transition-colors"><Eye className="w-3.5 h-3.5" /></Link>
         </div>
     );

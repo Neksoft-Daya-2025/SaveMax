@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 
 /**
  * Escapes special characters for use in a regular expression.

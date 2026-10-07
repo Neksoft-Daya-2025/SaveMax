@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -21,12 +20,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SaveMAX",
+  title: "PropertyNext",
   description: "Advanced Property Management System",
 };
 
 // Routes that should NOT use the tenant dashboard shell (landing, auth & superadmin pages)
-const NON_DASHBOARD_ROUTES = ["/login", "/register", "/setup", "/property", "/unit", "/superadmin", "/create-organization"];
+const NON_DASHBOARD_ROUTES = ["/site", "/login", "/register", "/setup", "/property", "/unit", "/superadmin", "/create-organization"];
 
 function isDashboardRoute(pathname: string): boolean {
   if (pathname === "/") return false;
@@ -39,20 +38,22 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth();
+  const headersList = await headers();
+  const pathname = headersList.get("x-pathname") || headersList.get("x-invoke-path") || "/";
   let initialSettings = null;
   try {
+    if (!pathname.startsWith('/site/')) {
     await connectDB();
     const settingsDoc = await Settings.findOne().lean();
     if (settingsDoc) {
       initialSettings = JSON.parse(JSON.stringify(settingsDoc));
+    }
     }
   } catch (error) {
     console.error("Failed to fetch initial settings in layout", error);
   }
 
   // Detect current path to decide whether to wrap with dashboard shell
-  const headersList = await headers();
-  const pathname = headersList.get("x-pathname") || headersList.get("x-invoke-path") || "/";
   const showDashboardShell = isDashboardRoute(pathname);
 
   const user = session?.user

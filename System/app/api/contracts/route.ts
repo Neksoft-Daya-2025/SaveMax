@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 import { auth } from "@/auth";
 import { connectToDB } from "@/lib/mongodb";
 import { initModels, Contract, Property, Customer, Unit, User } from "@/lib/initModels";

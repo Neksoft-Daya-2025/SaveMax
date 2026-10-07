@@ -1,22 +1,17 @@
-/* Developed by RUDRA via NEKLLM */
 import { NextResponse } from "next/server";
 import { connectToDB } from "@/lib/mongodb";
 import Unit from "@/models/Unit";
 import Settings from "@/models/Settings";
 import { initModels } from "@/lib/initModels";
-import mongoose from 'mongoose';
 
 export const dynamic = "force-dynamic";
 
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
     try {
-        const { id } = await params;
-        if (!mongoose.isObjectIdOrHexString(id)) {
-            return NextResponse.json({ success: false, error: 'Invalid unit ID' }, { status: 400 });
-        }
         await connectToDB();
         initModels();
 
+        const { id } = await params;
         const unit = await Unit.findById(id).populate('property', 'title location propertyType purpose').lean();
         if (!unit) return NextResponse.json({ success: false, error: 'Not found' }, { status: 404 });
 
@@ -36,7 +31,6 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
             }
         });
     } catch (error: any) {
-        console.error('Public unit lookup failed:', error);
-        return NextResponse.json({ success: false, error: 'Unable to load unit' }, { status: 500 });
+        return NextResponse.json({ success: false, error: error.message }, { status: 500 });
     }
 }

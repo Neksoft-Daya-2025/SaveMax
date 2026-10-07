@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 "use client";
 
 import { ReactNode } from "react";
@@ -32,7 +31,7 @@ export default function Modal({ isOpen, onClose, title, children, size = "md" }:
 
             {/* Modal */}
             <div className="flex min-h-full items-center justify-center p-4">
-                <div className={`relative w-full ${sizeClasses[size]} bg-white rounded-lg shadow-xl`}>
+                <div className={`relative w-full ${sizeClasses[size]} bg-white text-gray-900 rounded-lg shadow-xl`}>
                     {/* Header */}
                     <div className="flex items-center justify-between p-6 border-b border-gray-200">
                         <h3 className="text-xl font-bold text-gray-900">{title}</h3>

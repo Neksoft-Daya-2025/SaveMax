@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 import { Package, ShoppingCart, AlertCircle } from "lucide-react";
 
 interface Activity {

@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -70,7 +69,7 @@ export default function WebsiteSettingsPage() {
     const [landingPage, setLandingPage] = useState({
         // Brand & Header Identity
         logoUrl: "",
-        brandTitle: "SaveMAX",
+        brandTitle: "PropSaaS",
         brandBadge: "CLOUD",
         brandSubtitle: "All-in-One Multi-Tenant PMS",
 
@@ -112,7 +111,7 @@ export default function WebsiteSettingsPage() {
         // Testimonials
         testimonialsBadge: "Client Endorsements",
         testimonialsTitle: "Trusted by Forward-Thinking Property Leaders",
-        testimonialsSubtitle: "See how real estate organizations streamline their daily operations with SaveMAX.",
+        testimonialsSubtitle: "See how real estate organizations streamline their daily operations with PropSaaS.",
 
         // FAQ
         faqBadge: "Got Questions?",
@@ -126,7 +125,7 @@ export default function WebsiteSettingsPage() {
 
         // Footer
         footerDescription: "The next-generation multi-tenant cloud operating system for real estate enterprises, property managers, agents, and landlords worldwide.",
-        footerCopyright: "SaveMAX Platform. All rights reserved.",
+        footerCopyright: "PropSaaS Platform. All rights reserved.",
     });
 
     // FAQs State
@@ -592,7 +591,7 @@ export default function WebsiteSettingsPage() {
                                 <div className="flex flex-col">
                                     <div className="flex items-center gap-2">
                                         <span className="text-2xl font-black text-white tracking-tight">
-                                            {landingPage.brandTitle || "SaveMAX"}
+                                            {landingPage.brandTitle || "PropSaaS"}
                                         </span>
                                         {landingPage.brandBadge && (
                                             <span className="text-[11px] uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-indigo-500/25 text-indigo-300 border border-indigo-500/40">
@@ -612,7 +611,7 @@ export default function WebsiteSettingsPage() {
                                 <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Brand Title / Name</label>
                                 <input
                                     type="text"
-                                    placeholder="e.g. SaveMAX"
+                                    placeholder="e.g. PropSaaS"
                                     value={landingPage.brandTitle}
                                     onChange={(e) => setLandingPage({ ...landingPage, brandTitle: e.target.value })}
                                     className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 text-sm outline-none font-semibold text-gray-900"

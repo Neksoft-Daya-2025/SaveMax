@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -38,10 +37,10 @@ export default function Footer() {
           const lp = data.data.landingPage || {};
           setFooterData({
             logoUrl: lp.logoUrl,
-            platformName: "SaveMAX",
+            platformName: lp.brandTitle || data.data.platformName || "PropSaaS",
             badge: lp.brandBadge || "Cloud",
             description: lp.footerDescription,
-            copyright: "SaveMAX Platform. All rights reserved.",
+            copyright: lp.footerCopyright,
           });
         }
       } catch (err) {
@@ -71,7 +70,7 @@ export default function Footer() {
               )}
               <div className="flex flex-col">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-xl font-extrabold text-white tracking-tight">{footerData?.platformName || "SaveMAX"}</span>
+                  <span className="text-xl font-extrabold text-white tracking-tight">{footerData?.platformName || "PropSaaS"}</span>
                   {footerData?.badge && (
                     <span className="text-[10px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
                       {footerData.badge}
@@ -155,8 +154,7 @@ export default function Footer() {
         
         {/* Bottom bar */}
         <div className="pt-8 border-t border-slate-800/60 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
-          <p>© {new Date().getFullYear()} {footerData?.copyright || "SaveMAX Platform. All rights reserved."}</p>
-          <p>Developed by Neksoft Global Service Pvt. Ltd.</p>
+          <p>© {new Date().getFullYear()} {footerData?.copyright || "PropSaaS Platform. All rights reserved."}</p>
           <div className="flex flex-wrap items-center gap-6">
             <Link href="#" className="hover:text-slate-400 transition-colors">Privacy Policy</Link>
             <Link href="#" className="hover:text-slate-400 transition-colors">Terms of Service</Link>

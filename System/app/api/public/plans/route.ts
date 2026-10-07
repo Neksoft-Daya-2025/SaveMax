@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import { SaaSSettings } from '@/lib/initModels';

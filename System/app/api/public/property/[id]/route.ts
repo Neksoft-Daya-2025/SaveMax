@@ -1,41 +1,20 @@
-/* Developed by RUDRA via NEKLLM */
-import { NextResponse } from "next/server";
-import { connectToDB } from "@/lib/mongodb";
-import Property from "@/models/Property";
-import Settings from "@/models/Settings";
-import { initModels } from "@/lib/initModels";
-import mongoose from "mongoose";
+import { NextResponse } from 'next/server';
+import connectDB from '@/lib/mongodb';
+import Property from '@/models/Property';
+import Organization from '@/models/Organization';
+import { getPublicTenant, getPublicProperty } from '@/lib/public-site';
 
-export const dynamic = "force-dynamic";
-
+export const dynamic = 'force-dynamic';
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
-    try {
-        const { id } = await params;
-        if (!mongoose.isObjectIdOrHexString(id)) {
-            return NextResponse.json({ success: false, error: 'Invalid property ID' }, { status: 400 });
-        }
-        await connectToDB();
-        initModels();
-        const property = await Property.findById(id).lean();
-        if (!property) return NextResponse.json({ success: false, error: 'Not found' }, { status: 404 });
-
-        const settings = await Settings.findOne().lean();
-
-        return NextResponse.json({
-            success: true,
-            data: {
-                property,
-                settings: settings ? {
-                    storeName: (settings as any).storeName,
-                    address: (settings as any).address,
-                    phone: (settings as any).phone,
-                    email: (settings as any).email,
-                    currency: (settings as any).currency,
-                } : null,
-            }
-        });
-    } catch (error: any) {
-        console.error('Public property lookup failed:', error);
-        return NextResponse.json({ success: false, error: 'Unable to load property' }, { status: 500 });
-    }
+  try {
+    const { id } = await params;
+    if (!/^[a-f\d]{24}$/i.test(id)) return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    await connectDB();
+    const record: any = await Property.findOne({ _id: id, status: 'Available' }).select('organization').lean();
+    const org: any = record?.organization ? await Organization.findOne({ _id: record.organization, status: 'active' }).select('slug').lean() : null;
+    const tenant = org ? await getPublicTenant(org.slug) : null;
+    const property = tenant ? await getPublicProperty(tenant, id) : null;
+    if (!tenant || !property) return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    return NextResponse.json({ success: true, data: { property, settings: { storeName: tenant.name, address: tenant.address, phone: tenant.phone, email: tenant.email, currency: tenant.currency } } });
+  } catch { return NextResponse.json({ error: 'Unable to load this property.' }, { status: 500 }); }
 }

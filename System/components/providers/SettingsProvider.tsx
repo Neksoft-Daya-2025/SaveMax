@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 "use client";
 
 import React, { createContext, useContext, useEffect, useState, useCallback } from "react";

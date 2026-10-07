@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 
 "use client";
 
@@ -17,6 +16,7 @@ interface Settings {
     email: string;
     website: string;
     taxId: string;
+    kvkNumber: string;
     currency: string;
     timezone: string;
     taxRate: number;
@@ -52,6 +52,7 @@ export default function SettingsPage() {
         email: "",
         website: "",
         taxId: "",
+        kvkNumber: "",
         currency: "USD",
         timezone: "UTC",
         taxRate: 0,
@@ -120,6 +121,7 @@ export default function SettingsPage() {
                     email: data.data.email || "",
                     website: data.data.website || "",
                     taxId: data.data.taxId || "",
+                    kvkNumber: data.data.kvkNumber || "",
                     currency: data.data.currency || "USD",
                     timezone: data.data.timezone || "UTC",
                     taxRate: data.data.taxRate || 0,
@@ -232,7 +234,7 @@ export default function SettingsPage() {
                             value={settings.storeName}
                             onChange={(e) => setSettings({ ...settings, storeName: e.target.value })}
                             required
-                            placeholder="e.g. SaveMAX"
+                            placeholder="e.g. PropertyNext"
                         />
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -327,6 +329,13 @@ export default function SettingsPage() {
                             value={settings.taxId}
                             onChange={(e) => setSettings({ ...settings, taxId: e.target.value })}
                             placeholder="e.g. 123-456-789"
+                        />
+                        <FormInput
+                            label="KVK Number"
+                            type="text"
+                            placeholder="Enter your KVK number"
+                            value={settings.kvkNumber || ""}
+                            onChange={(e) => setSettings({ ...settings, kvkNumber: e.target.value })}
                         />
                     </div>
                 </div>

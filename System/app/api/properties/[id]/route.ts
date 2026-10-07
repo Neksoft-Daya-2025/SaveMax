@@ -1,26 +1,28 @@
-/* Developed by RUDRA via NEKLLM */
 
 import { NextResponse } from "next/server";
 import { connectToDB } from "@/lib/mongodb";
 import Property from "@/models/Property";
 import { auth } from "@/auth";
-import { NextRequest } from 'next/server';
-import { checkPermission } from '@/lib/rbac';
-import { propertyViewFilter } from '@/lib/property-access';
+import { applyTenantFilter } from '@/lib/tenant';
 
 export async function GET(
-    request: NextRequest,
+    request: Request,
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
-        const denied = await checkPermission(request, 'properties', 'view');
-        if (denied) return denied;
-        const session = await auth();
         const { id } = await params;
+        const session: any = await auth();
+        if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        const scope = session.user?.permissions?.properties?.view;
+        if (!session.user?.isSuperAdmin && scope !== 'all' && scope !== 'own') return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+        if (!/^[a-f\d]{24}$/i.test(id)) return NextResponse.json({ error: 'Not found' }, { status: 404 });
         await connectToDB();
-        const property = await Property.findOne(propertyViewFilter(session, { _id: id }))
+        const query = applyTenantFilter(session, { _id: id });
+        if (scope === 'own' && !session.user?.isSuperAdmin) query.$or = [{ createdBy: session.user.id }, { agent: session.user.id }, { owner: session.user.id }];
+        const property = await Property.findOne(query)
             .populate('agent', 'name email phone profileImage')
-            .populate('owner', 'name email phone profileImage');
+            .populate('owner', 'name email phone profileImage')
+            .populate('createdBy', 'name email phone');
 
         if (!property) {
             return NextResponse.json({ success: false, error: "Property not found" }, { status: 404 });
@@ -43,10 +45,16 @@ export async function PUT(
             return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
         }
 
+        const member: any = session.user;
+        if (!member.isSuperAdmin && !member.permissions?.properties?.edit) return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+        if (!/^[a-f\d]{24}$/i.test(id)) return NextResponse.json({ error: 'Not found' }, { status: 404 });
         await connectToDB();
+        const existing = await Property.findOne(applyTenantFilter(session, { _id: id }));
+        if (!existing) return NextResponse.json({ error: 'Not found' }, { status: 404 });
         const body = await request.json();
         const cleanFields = (data: any) => {
             const cleaned = { ...data };
+            for (const key of ['organization', 'createdBy', 'submissionSource', '_id', 'createdAt', 'updatedAt', '__v']) delete cleaned[key];
             const fieldsToClean = ['agent', 'owner', 'price', 'areaSize', 'bedrooms', 'bathrooms', 'parking', 'age'];
             fieldsToClean.forEach(field => {
                 if (cleaned[field] === "") delete cleaned[field];
@@ -75,7 +83,8 @@ export async function PUT(
                 const unitPayload = {
                     ...baseData,
                     ...unitOverrides,
-                    createdBy: session.user.id
+                    organization: existing.organization,
+                    createdBy: unitData._id === id ? existing.createdBy : session.user.id
                 };
 
                 if (unitData._id === id) {
@@ -133,7 +142,12 @@ export async function DELETE(
             return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
         }
 
+        const member: any = session.user;
+        if (!member.isSuperAdmin && !member.permissions?.properties?.delete) return NextResponse.json({ error: 'Access denied' }, { status: 403 });
+        if (!/^[a-f\d]{24}$/i.test(id)) return NextResponse.json({ error: 'Not found' }, { status: 404 });
         await connectToDB();
+        const existing = await Property.findOne(applyTenantFilter(session, { _id: id }));
+        if (!existing) return NextResponse.json({ error: 'Not found' }, { status: 404 });
         const property = await Property.findByIdAndDelete(id);
 
         if (!property) {

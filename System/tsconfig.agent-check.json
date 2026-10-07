@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "incremental": false, "noEmit": true },
+  "include": ["lib/agent-*.ts", "app/api/agent/**/*.ts", "app/api/agent-review/**/*.ts", "app/ai-approvals/page.tsx", "app/superadmin/ai-approvals/page.tsx", "components/agent/**/*.tsx", "types/**/*.d.ts", "next-auth.d.ts"],
+  "exclude": ["node_modules", ".next"]
+}

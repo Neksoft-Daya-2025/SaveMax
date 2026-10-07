@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 import { NextResponse } from "next/server";
 import { connectToDB } from "@/lib/mongodb";
 import Property from "@/models/Property";
@@ -8,7 +7,6 @@ import { checkPermission } from "@/lib/rbac";
 import { escapeRegex } from "@/lib/security";
 import { applyTenantFilter, injectTenant } from "@/lib/tenant";
 import { NextRequest } from "next/server";
-import { propertyViewFilter } from '@/lib/property-access';
 
 export async function GET(request: NextRequest) {
     try {
@@ -41,13 +39,20 @@ export async function GET(request: NextRequest) {
         }
 
         // Filtering
+        const agentId = searchParams.get('agent');
+        if (agentId) {
+            if (!/^[a-f\d]{24}$/i.test(agentId)) {
+                return NextResponse.json({ success: false, error: 'Invalid agent ID' }, { status: 400 });
+            }
+            query.agent = agentId;
+        }
         if (searchParams.get('type')) query.propertyType = searchParams.get('type');
         if (searchParams.get('purpose')) query.purpose = searchParams.get('purpose');
         if (searchParams.get('status')) query.status = searchParams.get('status');
         if (searchParams.get('isFeatured')) query.isFeatured = searchParams.get('isFeatured') === 'true';
 
         // Apply tenant isolation filter
-        query = propertyViewFilter(session, query);
+        query = applyTenantFilter(session, query);
 
         // Sort
         let sortQuery: any = { createdAt: -1 };
@@ -65,7 +70,7 @@ export async function GET(request: NextRequest) {
             .limit(limit);
 
         // Stats scoped to tenant
-        const baseStatsFilter = propertyViewFilter(session);
+        const baseStatsFilter = applyTenantFilter(session, {});
         const [totalAll, totalAvailable, totalOccupied, totalMaintenance] = await Promise.all([
             Property.countDocuments(baseStatsFilter),
             Property.countDocuments({ ...baseStatsFilter, status: 'Available' }),

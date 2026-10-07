@@ -1,8 +1,16 @@
-/* Developed by RUDRA via NEKLLM */
 import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 
 export default auth((req) => {
+    // This deployment serves Save Max's property website at the main domain.
+    // Rewrite internally so visitors keep the clean root URL.
+    if (req.nextUrl.pathname === '/') {
+        const destination = req.nextUrl.clone();
+        destination.pathname = '/site/save-max';
+        const requestHeaders = new Headers(req.headers);
+        requestHeaders.set('x-pathname', destination.pathname);
+        return NextResponse.rewrite(destination, { request: { headers: requestHeaders } });
+    }
     const isLoggedIn = !!req.auth;
     const { pathname } = req.nextUrl;
     const user = req.auth?.user as any;
@@ -12,6 +20,14 @@ export default auth((req) => {
         user?.role === 'SuperAdmin'
     );
     const permissions = user?.permissions;
+
+    // Public listing accounts use only the tenant storefront endpoints.
+    if (pathname.startsWith('/api/')) {
+        if (user?.role === 'Public customer' && !pathname.startsWith('/api/public/') && !pathname.startsWith('/api/auth/')) {
+            return NextResponse.json({ error: 'This account cannot access administration APIs.' }, { status: 403 });
+        }
+        return NextResponse.next();
+    }
 
     // Helper: create a NextResponse.next() with x-pathname injected as request header
     const nextWithPathname = () => {
@@ -23,6 +39,7 @@ export default auth((req) => {
     // Public routes that anyone can view
     const isPublicRoute =
         pathname === '/' ||
+        pathname === '/site' || pathname.startsWith('/site/') ||
         pathname === '/create-organization' || pathname.startsWith('/create-organization/') ||
         pathname === '/property' || pathname.startsWith('/property/') ||
         pathname === '/unit' || pathname.startsWith('/unit/');
@@ -44,7 +61,7 @@ export default auth((req) => {
         '/customers', '/agents', '/owners', '/staff', '/due-collection', 
         '/deposits', '/expenses', '/payroll', '/users', '/roles', '/settings', 
         '/profile', '/inquiries', '/bookings', '/maintenance', '/ai-reports', 
-        '/property-assistant', '/reports', '/amenities', '/suppliers', '/blogs', 
+        '/property-assistant', '/reports', '/amenities', '/suppliers', '/blogs', '/ai-approvals', '/savemax-ai',
         '/customer-dashboard', '/my-contracts'
     ];
     const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route));
@@ -56,6 +73,12 @@ export default auth((req) => {
 
     // 2. SuperAdmin access control
     if (isLoggedIn && isSuperAdmin) {
+        if (pathname === '/savemax-ai') {
+            return NextResponse.redirect(new URL('/superadmin/savemax-ai', req.url));
+        }
+        if (pathname === '/ai-approvals') {
+            return NextResponse.redirect(new URL('/superadmin/ai-approvals', req.url));
+        }
         // SuperAdmin on auth routes or standard org dashboard should go to superadmin panel
         if (isAuthRoute || pathname === '/dashboard') {
             return NextResponse.redirect(new URL('/superadmin', req.url));
@@ -128,7 +151,7 @@ export default auth((req) => {
 });
 
 export const config = {
-    matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+    matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
 };
 
 // Force Node.js runtime to support bcrypt and other Node.js modules

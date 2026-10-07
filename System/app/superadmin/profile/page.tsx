@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -94,8 +93,8 @@ export default function SuperAdminProfilePage() {
                     password: "",
                     confirmPassword: ""
                 }));
-                await update({});
                 setMessage({ type: "success", text: "SuperAdmin profile updated successfully!" });
+                if (update) update();
             } else {
                 setMessage({ type: "error", text: data.error || "Failed to update profile." });
             }

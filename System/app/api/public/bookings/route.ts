@@ -1,10 +1,7 @@
-/* Developed by RUDRA via NEKLLM */
 import { NextResponse } from "next/server";
 import { connectToDB } from "@/lib/mongodb";
 import Booking from "@/models/Booking";
 import User from "@/models/User";
-import Property from "@/models/Property";
-import Unit from "@/models/Unit";
 import { initModels } from "@/lib/initModels";
 import mongoose from "mongoose";
 
@@ -15,16 +12,11 @@ export async function POST(request: Request) {
         await connectToDB();
         initModels();
 
-        const body = await request.json().catch(() => null);
-        if (!body || typeof body !== 'object' || Array.isArray(body)) {
-            return NextResponse.json({ success: false, error: 'Invalid request body.' }, { status: 400 });
-        }
+        const body = await request.json();
         const { propertyId, unitId, name, email, phone, visitDate, visitTime, message } = body;
 
         // Validate required fields
-        if (![propertyId, name, email, phone, visitDate, visitTime].every(value => typeof value === 'string' && value.trim()) ||
-            (unitId != null && typeof unitId !== 'string') ||
-            (message != null && typeof message !== 'string')) {
+        if (!propertyId || !name || !email || !phone || !visitDate || !visitTime) {
             return NextResponse.json(
                 { success: false, error: "Please fill in all required fields." },
                 { status: 400 }
@@ -33,7 +25,7 @@ export async function POST(request: Request) {
 
         // Validate email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email.trim())) {
+        if (!emailRegex.test(email)) {
             return NextResponse.json(
                 { success: false, error: "Please provide a valid email address." },
                 { status: 400 }
@@ -41,46 +33,35 @@ export async function POST(request: Request) {
         }
 
         // Validate propertyId is a valid ObjectId
-        if (!mongoose.isObjectIdOrHexString(propertyId)) {
+        if (!mongoose.Types.ObjectId.isValid(propertyId)) {
             return NextResponse.json(
                 { success: false, error: "Invalid property." },
                 { status: 400 }
             );
         }
 
-        const parsedVisitDate = new Date(visitDate);
-        if (Number.isNaN(parsedVisitDate.getTime())) {
-            return NextResponse.json({ success: false, error: 'Invalid visit date.' }, { status: 400 });
-        }
-        const property = await Property.findById(propertyId);
-        if (!property) {
-            return NextResponse.json({ success: false, error: 'Property not found.' }, { status: 404 });
-        }
-        if (unitId) {
-            if (!mongoose.isObjectIdOrHexString(unitId) ||
-                !await Unit.exists({ _id: unitId, property: property._id, organization: property.organization || null })) {
-                return NextResponse.json({ success: false, error: 'Invalid unit for this property.' }, { status: 400 });
-            }
-        }
-
-        // Public submissions must never overwrite an existing account's profile.
-        let user = await User.findOne({ email: email.trim().toLowerCase() });
+        // Find existing user by email or create a guest user
+        // Always update name and phone to reflect the latest form submission
+        let user = await User.findOne({ email: email.toLowerCase() });
         if (!user) {
             user = await User.create({
                 name,
-                email: email.trim().toLowerCase(),
+                email: email.toLowerCase(),
                 phone,
-                organization: property.organization,
                 status: "Active",
             });
+        } else {
+            // Update user's name and phone with latest form data
+            user.name = name;
+            user.phone = phone;
+            await user.save();
         }
 
         // Build booking data
         const bookingData: any = {
             property: propertyId,
-            organization: property.organization,
             customer: user._id,
-            visitDate: parsedVisitDate,
+            visitDate: new Date(visitDate),
             visitTime,
             status: "Pending",
             message: message || "",
@@ -100,7 +81,7 @@ export async function POST(request: Request) {
     } catch (error: any) {
         console.error("Public booking error:", error);
         return NextResponse.json(
-            { success: false, error: "Something went wrong. Please try again." },
+            { success: false, error: error.message || "Something went wrong. Please try again." },
             { status: 500 }
         );
     }

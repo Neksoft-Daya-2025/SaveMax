@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import { User, Role, SaaSSettings } from '@/lib/initModels';
@@ -102,7 +101,7 @@ export async function POST(request: NextRequest) {
         let saasSettings = await SaaSSettings.findOne();
         if (!saasSettings) {
             saasSettings = await SaaSSettings.create({
-                platformName: 'SaveMAX',
+                platformName: 'PropertyNext SaaS',
                 supportEmail: 'support@propertynext.com',
                 phone: '+1 (555) 019-2834',
                 address: '100 Enterprise Blvd, Suite 500, San Francisco, CA 94107',

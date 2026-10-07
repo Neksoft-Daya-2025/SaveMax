@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 
 "use client";
 
@@ -65,6 +64,55 @@ export default function InquiriesPage() {
     });
 
     const [customers, setCustomers] = useState<{ value: string, label: string, name: string, email: string, phone: string }[]>([]);
+    const [addingCustomer, setAddingCustomer] = useState(false);
+    const [savingCustomer, setSavingCustomer] = useState(false);
+    const [customerError, setCustomerError] = useState("");
+    const [newCustomer, setNewCustomer] = useState({ name: "", email: "", phone: "" });
+    const customerSavePending = useRef(false);
+
+    const saveCustomer = async () => {
+        if (customerSavePending.current) return;
+        const contact = {
+            name: newCustomer.name.trim(),
+            email: newCustomer.email.trim(),
+            phone: newCustomer.phone.trim()
+        };
+        if (!contact.name || !contact.phone || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact.email)) {
+            setCustomerError("Enter a name, valid email address, and phone number.");
+            return;
+        }
+        customerSavePending.current = true;
+        setSavingCustomer(true);
+        setCustomerError("");
+        try {
+            const res = await fetch("/api/customers", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ...contact, status: "Active" })
+            });
+            const data = await res.json();
+            if (!res.ok || !data.success || !data.data?._id) {
+                throw new Error(data.error || "Could not create the customer.");
+            }
+            const customer = data.data;
+            const option = {
+                value: customer._id,
+                label: `${customer.name} (${customer.phone || customer.email})`,
+                name: customer.name,
+                email: customer.email || "",
+                phone: customer.phone || ""
+            };
+            setCustomers(prev => [option, ...prev.filter(c => c.value !== option.value)]);
+            setFormData(prev => ({ ...prev, name: option.name, email: option.email, phone: option.phone }));
+            setAddingCustomer(false);
+            setNewCustomer({ name: "", email: "", phone: "" });
+        } catch (error) {
+            setCustomerError(error instanceof Error ? error.message : "Could not create the customer. Please try again.");
+        } finally {
+            customerSavePending.current = false;
+            setSavingCustomer(false);
+        }
+    };
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -162,6 +210,9 @@ export default function InquiriesPage() {
     };
 
     const openModal = (inquiry: Inquiry | null = null) => {
+        setAddingCustomer(false);
+        setCustomerError("");
+        setNewCustomer({ name: "", email: "", phone: "" });
         if (inquiry) {
             setEditingInquiry(inquiry);
             setFormData({
@@ -189,12 +240,14 @@ export default function InquiriesPage() {
     };
 
     const closeModal = () => {
+        if (customerSavePending.current) return;
         setIsModalOpen(false);
         setEditingInquiry(null);
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (addingCustomer || customerSavePending.current) return;
         setSubmitting(true);
         try {
             const url = editingInquiry ? `/api/inquiries/${editingInquiry._id}` : "/api/inquiries";
@@ -410,11 +463,36 @@ export default function InquiriesPage() {
                                 <User className="w-4 h-4 text-blue-900" />
                                 Contact Information
                             </h4>
+                            <PermissionGate resource="customers" action="create">
+                                <button
+                                    type="button"
+                                    onClick={() => { setAddingCustomer(true); setCustomerError(""); }}
+                                    disabled={addingCustomer}
+                                    className="flex items-center gap-1 text-sm font-semibold text-blue-900 hover:text-blue-700 disabled:opacity-50"
+                                >
+                                    <Plus className="w-4 h-4" /> Add customer
+                                </button>
+                                {addingCustomer && (
+                                    <fieldset disabled={savingCustomer} className="rounded-lg border border-gray-200 bg-white p-4 space-y-3">
+                                        <legend className="px-1 text-sm font-semibold">New customer</legend>
+                                        <FormInput label="Name" value={newCustomer.name} onChange={e => setNewCustomer(prev => ({ ...prev, name: e.target.value }))} />
+                                        <FormInput label="Email" type="email" value={newCustomer.email} onChange={e => setNewCustomer(prev => ({ ...prev, email: e.target.value }))} />
+                                        <FormInput label="Phone" type="tel" value={newCustomer.phone} onChange={e => setNewCustomer(prev => ({ ...prev, phone: e.target.value }))} />
+                                        {customerError && <p role="alert" className="text-sm text-red-600">{customerError}</p>}
+                                        <div className="flex justify-end gap-3">
+                                            <button type="button" onClick={() => { setAddingCustomer(false); setCustomerError(""); }} className="text-sm text-gray-600">Cancel</button>
+                                            <button type="button" onClick={saveCustomer} className="rounded-lg bg-blue-900 px-4 py-2 text-sm font-semibold text-white disabled:opacity-50">
+                                                {savingCustomer ? "Saving..." : "Save and select customer"}
+                                            </button>
+                                        </div>
+                                    </fieldset>
+                                )}
+                            </PermissionGate>
                             <FormSelect
                                 label="Select Customer"
                                 required
                                 options={customers}
-                                value={customers.find(c => c.name === formData.name)?.value || ""}
+                                value={customers.find(c => c.name === formData.name && c.email === formData.email && c.phone === formData.phone)?.value || ""}
                                 onChange={(e: any) => {
                                     const selected = customers.find(c => c.value === e.target.value);
                                     if (selected) {
@@ -493,7 +571,7 @@ export default function InquiriesPage() {
 
                     <div className="flex justify-end gap-3 pt-2">
                         <button type="button" onClick={closeModal} className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-all font-medium">Cancel</button>
-                        <FormButton type="submit" loading={submitting} className="!w-auto px-8 !bg-blue-900 shadow-sm">
+                        <FormButton type="submit" loading={submitting} disabled={addingCustomer || savingCustomer} className="!w-auto px-8 !bg-blue-900 shadow-sm">
                             {editingInquiry ? "Save Changes" : "Create Inquiry"}
                         </FormButton>
                     </div>

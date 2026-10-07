@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 import { NextResponse } from "next/server";
 import { connectToDB } from "@/lib/mongodb";
 import Payment from "@/models/Payment";

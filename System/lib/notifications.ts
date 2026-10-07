@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 // Email and SMS utility functions for notifications
 // Now supports both environment variables and database settings
 

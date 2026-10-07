@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 
 "use client";
 
@@ -105,6 +104,8 @@ const menuSections = [
     {
         title: "AI Hub",
         items: [
+            { name: "SaveMax AI", href: "/savemax-ai", icon: Bot },
+            { name: "AI Approvals", href: "/ai-approvals", icon: Shield },
             { name: "AI Reports", href: "/ai-reports", icon: Sparkles },
             { name: "AI Property Assistant", href: "/property-assistant", icon: Bot },
         ]
@@ -140,12 +141,22 @@ const menuSections = [
 export default function Sidebar({ isSidebarOpen, isSidebarCollapsed, toggleSidebar }: SidebarProps) {
     const pathname = usePathname();
     const { canView, user } = usePermission();
-    const [storeName, setStoreName] = useState("SaveMAX");
+    const [storeName, setStoreName] = useState("PropertyNext");
+    const [canReviewAI, setCanReviewAI] = useState(false);
     const [expandedMenus, setExpandedMenus] = useState<Record<string, boolean>>({});
 
     useEffect(() => {
         fetchSettings();
     }, []);
+
+    useEffect(() => {
+        let active = true;
+        fetch('/api/agent-review/access', { cache: 'no-store' })
+            .then(async response => response.ok && (await response.json()).data?.href === '/ai-approvals')
+            .then(allowed => { if (active) setCanReviewAI(Boolean(allowed)); })
+            .catch(() => { if (active) setCanReviewAI(false); });
+        return () => { active = false; };
+    }, [user?.id]);
 
     useEffect(() => {
         // Automatically expand submenus that have active children on mount
@@ -175,7 +186,7 @@ export default function Sidebar({ isSidebarOpen, isSidebarCollapsed, toggleSideb
             const res = await fetch("/api/settings");
             const data = await res.json();
             if (data.success && data.data?.storeName) {
-                setStoreName("SaveMAX");
+                setStoreName(data.data.storeName);
             }
         } catch (error) {
             console.error("Error fetching settings:", error);
@@ -218,6 +229,7 @@ export default function Sidebar({ isSidebarOpen, isSidebarCollapsed, toggleSideb
     const filteredSections = menuSections.map(section => ({
         ...section,
         items: section.items.map(item => {
+            if ((item.name === 'AI Approvals' || item.name === 'SaveMax AI') && !canReviewAI) return null;
             if (item.subItems) {
                 // Hide Contracts and Reports parent menus from agents
                 if (user?.role === 'Agent' && (item.name === 'Contracts' || item.name === 'Reports')) {

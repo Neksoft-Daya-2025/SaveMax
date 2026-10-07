@@ -1,11 +1,10 @@
-/* Developed by RUDRA via NEKLLM */
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import { SaaSSettings, FAQ, Review } from '@/lib/initModels';
 
 const DEFAULT_FAQS = [
     {
-        question: "How does multi-tenancy work in SaveMAX?",
+        question: "How does multi-tenancy work in PropSaaS?",
         answer: "Each organization receives a completely isolated workspace with its own dedicated Admin, Agents, and Customers. Your properties, contracts, financial data, and team members are strictly partitioned and secure.",
         order: 0,
         category: "Architecture",
@@ -47,7 +46,7 @@ const DEFAULT_REVIEWS = [
         role: "Managing Director",
         company: "Vance & Co Properties",
         units: "320 Units",
-        content: "SaveMAX cut our overdue rent collections by 75% within the first two months. The automated reminders and tenant portal are absolute game-changers.",
+        content: "PropSaaS cut our overdue rent collections by 75% within the first two months. The automated reminders and tenant portal are absolute game-changers.",
         rating: 5,
         order: 0,
         isActive: true,
@@ -112,7 +111,7 @@ export async function GET() {
             success: true,
             data: {
                 isDemo,
-                platformName: settings.platformName || 'SaveMAX',
+                platformName: settings.platformName || 'PropSaaS',
                 supportEmail: settings.supportEmail,
                 phone: settings.phone,
                 address: settings.address,

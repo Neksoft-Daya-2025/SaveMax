@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {

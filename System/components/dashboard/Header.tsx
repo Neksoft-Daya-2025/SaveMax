@@ -1,10 +1,9 @@
-/* Developed by RUDRA via NEKLLM */
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { User, Menu, ChevronLeft, ChevronRight, LogOut, Settings, Clock } from "lucide-react";
+import { User, Menu, ChevronLeft, ChevronRight, LogOut, Settings, Clock, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import PermissionGate from "@/components/PermissionGate";
 import { getTimezoneInfo } from "@/lib/timezones";
 
@@ -19,6 +18,8 @@ interface HeaderProps {
 }
 
 export default function Header({ toggleSidebar, toggleCollapse, isSidebarCollapsed, user }: HeaderProps) {
+    const { data: session } = useSession();
+    const tenantSlug = session?.user?.organization?.slug;
     const [isProfileOpen, setIsProfileOpen] = useState(false);
     const [currentTime, setCurrentTime] = useState("");
     const [timezone, setTimezone] = useState("UTC");
@@ -118,6 +119,18 @@ export default function Header({ toggleSidebar, toggleCollapse, isSidebarCollaps
             </div>
 
             <div className="flex items-center gap-6">
+                {tenantSlug && (
+                    <Link
+                        href={`/site/${encodeURIComponent(tenantSlug)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-lg bg-blue-900 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-900"
+                        aria-label="View website (opens in a new tab)"
+                    >
+                        <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                        View website
+                    </Link>
+                )}
                 {/* Time and Timezone Display */}
                 {(() => {
                     const tzInfo = getTimezoneInfo(timezone);

@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -144,6 +143,16 @@ export default function SuperAdminLayout({
                     href: "/superadmin/users",
                     icon: Users,
                 },
+                {
+                    name: "SaveMax AI",
+                    href: "/superadmin/savemax-ai",
+                    icon: Sparkles,
+                },
+                {
+                    name: "AI Approvals",
+                    href: "/superadmin/ai-approvals",
+                    icon: Shield,
+                },
             ]
         },
         {
@@ -215,7 +224,7 @@ export default function SuperAdminLayout({
                                     <Shield className="w-5 h-5 text-white" />
                                 </div>
                                 <div className="min-w-0">
-                                    <h1 className="text-base font-bold text-gray-900 tracking-tight truncate">SaveMAX</h1>
+                                    <h1 className="text-base font-bold text-gray-900 tracking-tight truncate">PropertyNext</h1>
                                     <div className="flex items-center gap-1.5 mt-0.5">
                                         <span className="text-[10px] text-gray-500 font-medium uppercase tracking-wider">SuperAdmin</span>
                                         <span className="px-1.5 py-0.2 rounded text-[9px] font-extrabold bg-blue-100 text-blue-900 uppercase tracking-wider">
@@ -445,8 +454,8 @@ export default function SuperAdminLayout({
                 {/* Footer (Matching Admin Footer Design) */}
                 <footer className="py-4 px-6 bg-white border-t border-gray-200">
                     <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-2">
-                        <p>© {new Date().getFullYear()} SaveMAX Platform. SuperAdmin Control Center.</p>
-                        <p className="text-gray-400 font-medium">Developed by Neksoft Global Service Pvt. Ltd.</p>
+                        <p>© {new Date().getFullYear()} PropertyNext SaaS Platform. SuperAdmin Control Center.</p>
+                        <p className="text-gray-400 font-medium">Thank you for your business!</p>
                     </div>
                 </footer>
             </div>

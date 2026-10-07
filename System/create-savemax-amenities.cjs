@@ -1,0 +1,23 @@
+const fs=require('fs'),ts=require('typescript'),Module=require('module'),mongoose=require('mongoose');
+const modelPath=require('path').resolve('models/Amenity.ts');
+const mod=new Module(modelPath,module);mod.filename=modelPath;mod.paths=module.paths;
+mod._compile(ts.transpileModule(fs.readFileSync(modelPath,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,esModuleInterop:true}}).outputText,modelPath);
+const Amenity=mod.exports.default;
+(async()=>{
+ const uri=fs.readFileSync('.env.local','utf8').match(/^MONGODB_URI=(.*)$/m)[1].trim();
+ await mongoose.connect(uri);
+ const org=await mongoose.connection.collection('organizations').findOne({slug:'save-max',status:'active'});
+ if(!org)throw Error('Save Max tenant not found');
+ const admin=await mongoose.connection.collection('users').findOne({organization:org._id,email:'savemax@gmail.com',status:'Active'});
+ if(!admin)throw Error('Save Max admin not found');
+ const names=['Wi-Fi','Parking','Lift / Elevator','Balcony','Garden','Air Conditioning','Gym / Fitness Centre','Swimming Pool','CCTV Security','EV Charging'];
+ const existing=await Amenity.find({organization:org._id}).lean();
+ const missing=names.filter(n=>!existing.some(a=>a.name.toLowerCase()===n.toLowerCase()));
+ const docs=missing.map(name=>({name,status:'Active',organization:org._id,createdBy:admin._id}));
+ for(const doc of docs)await new Amenity(doc).validate();
+ if(docs.length)await Amenity.insertMany(docs);
+ const saved=await Amenity.find({organization:org._id,name:{$in:names}}).select('name status organization').lean();
+ if(saved.length!==10)throw Error('Expected 10 amenities');
+ console.log(JSON.stringify({tenant:org.name,created:docs.length,verified:saved.length,amenities:saved.map(a=>({name:a.name,status:a.status}))},null,2));
+ await mongoose.disconnect();
+})().catch(e=>{console.error(e.message);process.exit(1)});

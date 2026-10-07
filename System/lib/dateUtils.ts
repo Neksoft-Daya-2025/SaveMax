@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 // Timezone-aware date utilities for NextProperty SaaS (Admin & SuperAdmin)
 import { getTimezoneInfo } from "./timezones";
 

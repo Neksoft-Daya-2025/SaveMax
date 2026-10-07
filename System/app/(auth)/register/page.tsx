@@ -1,4 +1,3 @@
-/* Developed by RUDRA via NEKLLM */
 'use client';
 
 import { useState, FormEvent } from 'react';
@@ -56,7 +55,7 @@ export default function RegisterPage() {
             <div className="w-full max-w-md">
                 {/* Logo/Title */}
                 <div className="text-center mb-8">
-                    <h1 className="text-4xl font-bold text-white mb-2">SaveMAX</h1>
+                    <h1 className="text-4xl font-bold text-white mb-2">Property Next</h1>
                     <p className="text-purple-300">Create your account</p>
                 </div>
 
@@ -130,7 +129,7 @@ export default function RegisterPage() {
 
                 {/* Footer */}
                 <p className="text-center text-gray-400 text-sm mt-8">
-                    Join SaveMAX today
+                    Join Property Next today
                 </p>
             </div>
         </div>
