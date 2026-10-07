@@ -1,5 +1,10 @@
 # Save Max website changelog
 
+## 0.1.3 — 2026-10-07
+
+- Scope Save Max sign-in to its organization so the admin email can be used independently of the other site in the shared database.
+- Resolve the signed-in user's profile by account ID when an email is shared across organizations.
+
 ## 0.1.2 — 2026-10-07
 
 - Set the public phone and address on `www.savemax.ro` to the Romania contact details.

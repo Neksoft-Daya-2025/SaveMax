@@ -18,11 +18,29 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
                 try {
                     await dbConnect();
-                    const { User } = initModels();
+                    const { User, Organization } = initModels();
+
+                    // The Save Max deployment shares a database with another site.
+                    // Resolve its own organization first so equal email addresses
+                    // cannot authenticate as a user from the other deployment.
+                    const saveMaxDeployment = (() => {
+                        try {
+                            return new URL(process.env.NEXTAUTH_URL || '').hostname.endsWith('savemax.ro');
+                        } catch {
+                            return false;
+                        }
+                    })();
+                    const organization = saveMaxDeployment
+                        ? await Organization.findOne({ slug: 'save-max' }).select('_id')
+                        : null;
+                    if (saveMaxDeployment && !organization) {
+                        throw new Error('Save Max organization is unavailable');
+                    }
 
                     // Find user and include password field, role & organization
                     const user: any = await User.findOne({
-                        email: (credentials.email as string).toLowerCase().trim()
+                        email: (credentials.email as string).toLowerCase().trim(),
+                        ...(organization ? { organization: organization._id } : {}),
                     }).select('+password').populate('role').populate('organization');
 
                     if (!user) {

@@ -8,7 +8,7 @@ import bcrypt from 'bcryptjs';
 export async function GET(request: NextRequest) {
     try {
         const session = await auth();
-        if (!session || !session.user?.email) {
+        if (!session || !session.user?.id) {
             return NextResponse.json(
                 { success: false, error: 'Unauthorized' },
                 { status: 401 }
@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
 
         await connectDB();
 
-        const user = await User.findOne({ email: session.user.email }).select('-password');
+        const user = await User.findById(session.user.id).select('-password');
         if (!user) {
             return NextResponse.json(
                 { success: false, error: 'User not found' },
@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
 export async function PUT(request: NextRequest) {
     try {
         const session = await auth();
-        if (!session || !session.user?.email) {
+        if (!session || !session.user?.id) {
             return NextResponse.json(
                 { success: false, error: 'Unauthorized' },
                 { status: 401 }
@@ -62,7 +62,7 @@ export async function PUT(request: NextRequest) {
         }
 
         // Find current user
-        const user = await User.findOne({ email: session.user.email });
+        const user = await User.findById(session.user.id);
         if (!user) {
             return NextResponse.json(
                 { success: false, error: 'User not found' },
