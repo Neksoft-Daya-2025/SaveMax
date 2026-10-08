@@ -1,5 +1,9 @@
 # Save Max website changelog
 
+## 0.1.4 — 2026-10-08
+
+- Added a linked "Powered by NekDigital" credit to the Save Max public site footer.
+
 ## 0.1.3 — 2026-10-07
 
 - Scope Save Max sign-in to its organization so the admin email can be used independently of the other site in the shared database.

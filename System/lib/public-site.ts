@@ -15,7 +15,7 @@ export type PublicProperty = {
 };
 export type PublicTenant = {
   id: string; slug: string; name: string; logo: string; email: string; phone: string;
-  address: string; kvkNumber: string; currency: string;
+  address: string; kvkNumber: string; currency: string; showNekdigitalCredit: boolean;
 };
 const isSaveMaxDomain = (slug: string) =>
   slug === 'save-max' && process.env.NEXTAUTH_URL?.replace(/\/$/, '') === 'https://www.savemax.ro';
@@ -31,7 +31,8 @@ export const getPublicTenant = cache(async (slug: string): Promise<PublicTenant 
     logo: s.logoUrl || org.logoUrl || '', email: s.email || org.email || '',
     phone: (saveMaxDomain && process.env.SAVEMAX_PUBLIC_PHONE) || s.phone || org.phone || '',
     address: (saveMaxDomain && process.env.SAVEMAX_PUBLIC_ADDRESS) || s.address || org.address || '',
-    kvkNumber: s.kvkNumber || '', currency: s.currency || org.subscription?.currency || 'EUR' };
+    kvkNumber: s.kvkNumber || '', currency: s.currency || org.subscription?.currency || 'EUR',
+    showNekdigitalCredit: saveMaxDomain };
 });
 
 const publicFields = 'title description propertyType purpose price pricePeriod hideExactAddress areaSize areaUnit bedrooms bathrooms parking amenities images location agent';
